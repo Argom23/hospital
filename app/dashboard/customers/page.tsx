@@ -63,7 +63,13 @@ export default function Page() {
                             </td>
                             <td className="px-6 py-4 text-right">
                                 <a href="#"
-                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                                <a>/</a>
+                                <a href="#"
+                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalles</a>
+                                <a>/</a>
+                                <a href="#"
+                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Eliminar</a>
                             </td>
                         </tr>
                     ))}
