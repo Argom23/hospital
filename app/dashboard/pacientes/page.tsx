@@ -23,17 +23,6 @@ export default function Page() {
     return (
         <div className="bg-gradient-to-r bg-neutral-800">
             <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={fetchUsers}>Get Users</button>
-
-            {/*{!loading && !error && users.length > 0 && (*/}
-            {/*    <ul>*/}
-            {/*        {users.map((user: any) => (*/}
-            {/*            <li key={user.EMPLOYEE_ID}>*/}
-            {/*                <h3>{user.FIRST_NAME}</h3>*/}
-            {/*            </li>*/}
-            {/*        ))}*/}
-            {/*    </ul>*/}
-            {/*)}*/}
-
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Tabla de usuarios</h1>
             {!loading && !error && users.length > 0 && (
                 <div className={"relative overflow-x-auto shadow-md sm:rounded-lg"}>
