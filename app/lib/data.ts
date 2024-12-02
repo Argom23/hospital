@@ -1,5 +1,4 @@
 
-import {FormattedDoctoresTable, FormattedHospitalesTable} from './definitions';
 import { z } from "zod";
 //TODO arreglar la db para poder pedir todo
 
