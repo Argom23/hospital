@@ -37,31 +37,31 @@ app.get('/api/personal/', async (req, res) => {
     res.status(200).json(results);
 });
 
-app.get('/api/receta/', async (req, res) => {
+app.get('/api/recetas/', async (req, res) => {
 
     const results = await getReceta();
     res.status(200).json(results);
 });
 
-app.get('/api/medicina/', async (req, res) => {
+app.get('/api/medicinas/', async (req, res) => {
 
     const results = await getMedicina();
     res.status(200).json(results);
 });
 
-app.get('/api/cita/', async (req, res) => {
+app.get('/api/citas/', async (req, res) => {
 
     const results = await getCita();
     res.status(200).json(results);
 });
 
-app.get('/api/paciente/', async (req, res) => {
+app.get('/api/pacientes/', async (req, res) => {
 
     const results = await getPaciente();
     res.status(200).json(results);
 });
 
-app.get('/api/hospital/', async (req, res) => {
+app.get('/api/hospitales/', async (req, res) => {
 
     const results = await getHospital();
     res.status(200).json(results);
@@ -456,3 +456,4 @@ async function getDoctores() {
         }
     }
 }
+

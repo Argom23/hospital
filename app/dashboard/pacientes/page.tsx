@@ -11,7 +11,7 @@ export default function Page() {
     const fetchPacientes = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3010/api/paciente');
+            const response = await axios.get('http://localhost:3010/api/pacientes');
             console.log(response);
             setPacientes(response.data); // Store the fetched data in state
         } catch (err) {
