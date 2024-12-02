@@ -3,7 +3,7 @@ import { z } from "zod";
 //TODO arreglar la db para poder pedir todo
 
 export async function fetchDoctoresInfo() {
-    const url='http://localhost:3010/api/doctores'
+    const url='http://localhost:3010/api/doctor'
     const response = await fetch(url);
     if(!response.ok) {
       throw new Error(response.statusText);
@@ -13,7 +13,7 @@ export async function fetchDoctoresInfo() {
 }
 export async function fetchHospitales(){
 
-  const url='http://localhost:3010/api/hospitales';
+  const url='http://localhost:3010/api/hospital';
   const response = await fetch(url);
   if(!response.ok) {
     throw new Error(response.statusText);

@@ -2,7 +2,8 @@
 import {
   UserGroupIcon,
   HomeIcon,
-  DocumentDuplicateIcon, AtSymbolIcon,
+  AtSymbolIcon,
+    CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,11 +12,17 @@ import clsx from 'clsx';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  {name:'Doctores', href:'/dashboard/doctores',icon: AtSymbolIcon },
-  {name:'Hospitales', href:'/dashboard/hospitales',icon: HomeIcon},
-  { name: 'Paciente', href: '/dashboard/pacientes', icon: UserGroupIcon },
-
+  { name: 'Home', href: '/dashboard'},
+  {name:'Doctores', href:'/dashboard/doctores'},
+  {name:'Hospitales', href:'/dashboard/hospitales'},
+  { name: 'Paciente', href: '/dashboard/pacientes' },
+  {name: 'Facturas',href: '/dashboard/facturas' },
+  {name: 'recentas', href:'/dashboard/recentas' },
+  {name:'Cirugia', href:'/dashboard/cirugia' },
+  {name:'Personal', href:'/dashboard/personal' },
+  {name: 'Tratamiento', href:'/dashboard/tratamiento' },
+  {name:'Cita', href:'/dashboard/cita' },
+  {name:"Medicina", href:'/dashboard/medicina' },
 ];
 
 export default function NavLinks() {
@@ -23,7 +30,6 @@ export default function NavLinks() {
   return (
     <>
       {links.map((link) => {
-        const LinkIcon = link.icon;
         return (
             <Link
                 key={link.name}
@@ -35,7 +41,7 @@ export default function NavLinks() {
                     },
                 )}
             >
-              <LinkIcon className="w-6" />
+
               <p className="hidden md:block">{link.name}</p>
             </Link>
         );
