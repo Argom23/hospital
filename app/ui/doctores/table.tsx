@@ -10,27 +10,27 @@ export default async function DoctoresTable() {
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
                     <div className="md:hidden">
-                        {doctores?.map((doctores:any) => (
+                        {doctores?.map((doctor:any) => (
                             <div
-                                key={doctores.id_doctor}
+                                key={doctor.ID_DOCTOR}
                                 className="mb-2 w-full rounded-md bg-white p-4"
                             >
                                 <div className="flex items-center justify-between border-b pb-4">
                                     <div>
                                         <div className="mb-2 flex items-center">
-                                            <p>{doctores.nombre_doctor}</p>
+                                            <p>{doctor.NOMBRE_DOCTOR}</p>
                                         </div>
-                                        <p className="text-sm text-gray-500">{doctores.Especializacion}</p>
-                                        <p className="text-sm text-gray-500">{doctores.Departamento}</p>
-                                        <p className={"text-sm text-gray-500"}>{doctores.Hospital}</p>
+                                        <p className="text-sm text-gray-500">{doctor.ESPECIALIZACION}</p>
+                                        <p className="text-sm text-gray-500">{doctor.DEPARTAMENTO}</p>
+                                        <p className={"text-sm text-gray-500"}>{doctor.HOSPITAL}</p>
                                     </div>
 
                                 </div>
                                 <div className="flex w-full items-center justify-between pt-4">
                                     <div className="flex justify-end gap-2">
-                                        <DetailsDoctor id={doctores.id_doctor}/>
-                                        <EditarDoctor id={doctores.id_doctor}/>
-                                        <BorrarDoctor id={doctores.id_doctor}/>
+                                        <DetailsDoctor id={doctor.ID_DOCTOR}/>
+                                        <EditarDoctor id={doctor.ID_DOCTOR}/>
+                                        <BorrarDoctor id={doctor.ID_DOCTOR}/>
                                     </div>
                                 </div>
                             </div>
@@ -57,32 +57,32 @@ export default async function DoctoresTable() {
                         </tr>
                         </thead>
                         <tbody className="bg-white">
-                        {doctores?.map((doctores:any) => (
+                        {doctores?.map((doctor:any) => (
                             <tr
-                                key={doctores.id_doctor}
+                                key={doctor.ID_DOCTOR}
                                 className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                             >
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex items-center gap-3">
 
-                                        <p>{doctores.nombre_doctor}</p>
+                                        <p>{doctor.NOMBRE_DOCTOR}</p>
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {doctores.Especializacion}.
+                                    {doctor.ESPECIALIZACION}.
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {doctores.Departamento}
+                                    {doctor.DEPARTAMENTO}
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {doctores.Hospital}
+                                    {doctor.HOSPITAL}
                                 </td>
 
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">
-                                        <DetailsDoctor id={doctores.id_doctor}/>
-                                        <EditarDoctor id={doctores.id_doctor}/>
-                                        <BorrarDoctor id={doctores.id_doctor}/>
+                                        <DetailsDoctor id={doctor.ID_DOCTOR}/>
+                                        <EditarDoctor id={doctor.ID_DOCTOR}/>
+                                        <BorrarDoctor id={doctor.ID_DOCTOR}/>
                                     </div>
                                 </td>
                             </tr>

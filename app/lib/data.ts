@@ -1,15 +1,12 @@
 
 import { z } from "zod";
+import axios from "axios";
 //TODO arreglar la db para poder pedir todo
 
 export async function fetchDoctoresInfo() {
-    const url='http://localhost:3010/api/doctor'
-    const response = await fetch(url);
-    if(!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const data = await response.json();
-    return data;
+    const url='http://localhost:3010/api/doctores'
+    const response = await axios.get(url);
+    return response.data;
 }
 export async function fetchHospitales(){
 
@@ -19,7 +16,6 @@ export async function fetchHospitales(){
     throw new Error(response.statusText);
   }
   const hospitales = await response.json();
-  const id = hospitales[0].IdHospital;
   return hospitales;
 }
 

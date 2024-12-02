@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
 export default function Page() {
-    const [users, setUsers] = useState([]);
+    const [pacientes, setPacientes] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const fetchUsers = async () => {
+    const fetchPacientes = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3010/api/users');
+            const response = await axios.get('http://localhost:3010/api/paciente');
             console.log(response);
-            setUsers(response.data); // Store the fetched data in state
+            setPacientes(response.data); // Store the fetched data in state
         } catch (err) {
             setError('Error fetching data');
         } finally {
@@ -22,18 +22,24 @@ export default function Page() {
     };
     return (
         <div className="bg-gradient-to-r bg-neutral-800">
-            <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={fetchUsers}>Get Users</button>
+            <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={fetchPacientes}>Get Pacientes</button>
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Tabla de usuarios</h1>
-            {!loading && !error && users.length > 0 && (
+            {!loading && !error && pacientes.length > 0 && (
                 <div className={"relative overflow-x-auto shadow-md sm:rounded-lg"}>
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-6 py-3">
-                            Nombre Empleado
+                            Nombre
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Apellidos
+                            Numero
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Correo
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Dirección
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Opciones
@@ -41,14 +47,20 @@ export default function Page() {
                     </tr>
                     </thead>
                     <tbody>
-                    {users.map((user: any) => (
-                        <tr key={user.EMPLOYEE_ID}
+                    {pacientes.map((user: any) => (
+                        <tr key={user.ID_PACIENTE}
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td className="px-6 py-4">
-                                {user.FIRST_NAME}
+                                {user.Nombre_Completo}
                             </td>
                             <td className="px-6 py-4">
-                                {user.LAST_NAME}
+                                {user.Numero_Paciente}
+                            </td>
+                            <td className="px-6 py-4">
+                                {user.Correo_Paciente}
+                            </td>
+                            <td className="px-6 py-4">
+                                {user.Direccion}
                             </td>
                             <td className="px-6 py-4 text-right">
                                 <a href="#"

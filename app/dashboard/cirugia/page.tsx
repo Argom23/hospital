@@ -53,26 +53,26 @@ export default function Page() {
                         </tr>
                         </thead>
                         <tbody>
-                        {cirugias.map((cirugia: any) => (
-                            <tr key={cirugia.ID_Cirugia}
+                        {cirugias.map((cirugia:any) => (
+                            <tr key={cirugia.ID_CIRUGIA}
                                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="px-6 py-4">
-                                    {cirugia.Nombre_Cirugia}
+                                    {cirugia.NOMBRE_CIRUGIA}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {cirugia.Paciente}
+                                    {cirugia.PACIENTE}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {cirugia.Doctor}
+                                    {cirugia.DOCTOR}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {cirugia.Fecha_Cirugia}
+                                    {cirugia.FECHA_CIRUGIA}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {cirugia.Hora_Cirugia}
+                                    {cirugia.HORA_CIRUGIA}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {cirugia.Costo_Cirugia}
+                                    {cirugia.COSTO_CIRUGIA}
                                 </td>
                                 <td className="px-6 py-4 text-right">
                                     <a href="#"
