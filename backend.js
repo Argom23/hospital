@@ -72,6 +72,16 @@ app.get('/api/doctores/', async (req, res) => {
     const results = await getDoctores();
     res.status(200).json(results);
 });
+app.get('/api/medicinas/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const results = await getMedicinaById(id);
+        res.status(200).json(results);
+    } catch (err) {
+        Console.log(err);
+    }
+});
+
 
 const PORT = process.env.PORT || 3010;
 app.listen(PORT, () => {
@@ -302,6 +312,39 @@ async function getMedicina() {
         const result = await connection.execute(
             `SELECT *
              FROM FIDE_Medicina_TB`, // Consulta
+            [],                        // Parámetros opcionales (vacío en este caso)
+            {outFormat: oracledb.OUT_FORMAT_OBJECT} // Resultado como objetos clave-valor
+        );
+        return result.rows;
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+}
+async function getMedicinaById(id) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log("Successfully connected to Oracle Database");
+
+        // Select data
+        const result = await connection.execute(
+            `SELECT *
+             FROM FIDE_Medicina_TB
+             WHERE (id == FIDE_MEDICINA_TB.MEDICINA_ID)`, // Consulta
             [],                        // Parámetros opcionales (vacío en este caso)
             {outFormat: oracledb.OUT_FORMAT_OBJECT} // Resultado como objetos clave-valor
         );
