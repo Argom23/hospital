@@ -9,37 +9,11 @@ import axios from 'axios';
 
 
 export default function Page() {
-  const [users, setUsers] = useState([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const fetchUsers = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get('http://localhost:3010/api/users');
-      console.log(response);
-      setUsers(response.data); // Store the fetched data in state
-    } catch (err) {
-      setError('Error fetching data');
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
       <main className="flex min-h-screen flex-col p-6">
 
         <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-          <button onClick={fetchUsers}>Get Users</button>
-          {!loading && !error && users.length > 0 && (
-              <ul>
-                {users.map((user:any) => (
-                    <li key={user.EMPLOYEE_ID}>
-                      <h3>{user.FIRST_NAME}</h3>
-                    </li>
-                ))}
-              </ul>
-          )}
+
         </div>
         <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
           <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
@@ -52,7 +26,7 @@ export default function Page() {
             </p>
             <div className={styles.shape}/>
             <Link
-                href="/login"
+                href="/dashboard/"
                 className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
             >
               <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6"/>
