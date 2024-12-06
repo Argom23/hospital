@@ -24,12 +24,11 @@ export default async function DetailsPage(props : {params: Promise<{id : number}
                     <label className={'mt-1'}>Cantidad: 21</label>
                 </div>
             </div>
-            <div className=" mt-4 flex  gap-4 justify-end">
+            <div className=" mt-4 flex  gap-4 ">
                 <Link href="/dashboard/medicina"
-                      className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-xl font-medium text-white transition-colors hover:bg-blue-400 duration-300">
+                      className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-base font-medium text-white transition-colors hover:bg-blue-400 duration-300">
                     Volver
                 </Link>
-
             </div>
         </main>
     );
