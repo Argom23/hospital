@@ -1,6 +1,6 @@
 import {DetailsHospital} from "@/app/ui/hospital/buttons.";
 import {fetchMedicina} from "@/app/lib/data";
-import DetailsMedicina from "@/app/ui/medicina/buttons";
+import { DetailsMedicina }from "@/app/ui/medicina/buttons";
 
 export default async function MedicinaTable(){
     const data = await fetchMedicina();
