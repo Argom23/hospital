@@ -41,7 +41,6 @@ export async function fetchPacientes(search?:string ) {
         const url='http://localhost:3010/api/pacientes';
         const response = await fetch(url);
         const json = await response.json()
-        console.log(json)
         if(!response.ok){
             throw new Error(response.statusText);
         }
@@ -92,7 +91,7 @@ export async function fetchFacturaById(id:number){
     }
     return response.json();
 }
-export async function fetchCirugia(){
+export async function fetchCirugias(){
     const url='http://localhost:3010/api/cirugias';
     const response = await fetch(url);
     if(!response.ok){

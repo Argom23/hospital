@@ -1,51 +1,55 @@
-import {fetchCitas} from "@/app/lib/data";
-import {BorrarDoctor, DetailsDoctor, EditarDoctor} from "@/app/ui/doctores/buttons.";
+import {BorrarCirugia, DetailsCirugia, EditarCirugia} from "@/app/ui/cirugias/buttons";
+import {fetchCirugias} from "@/app/lib/data";
 
-export default async function TablaCitas(){
-    const data = await fetchCitas();
+export default async function CirugiasTable() {
+    const cirugias = await fetchCirugias();
     return (
         <div className="mt-6 flow-root">
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
                     <div className="md:hidden">
-                        {data?.map((cita:any) => (
+                        {cirugias?.map((cirugia:any) => (
                             <div
-                                key={cita.ID_CITA}
+                                key={cirugia.ID_CIRUGIA}
                                 className="mb-2 w-full rounded-md bg-white p-4"
                             >
                                 <div className="flex items-center justify-between border-b pb-4">
                                     <div>
                                         <div className="mb-2 flex items-center">
-                                            <p>{cita.PACIENTE}</p>
+                                            <p>{cirugia.NOMBRE_CIRUGIA}</p>
                                         </div>
-                                        <p className="text-sm text-gray-500">{cita.DOCTOR}</p>
-                                        <p className="text-sm text-gray-500">{cita.FECHA_CITA}</p>
-                                        <p className={"text-sm text-gray-500"}>{cita.HORA_CITA}</p>
+                                        <p className="text-sm text-gray-500">{cirugia.PACIENTE}</p>
+                                        <p className="text-sm text-gray-500">{cirugia.DOCTOR}</p>
+                                        <p className={"text-sm text-gray-500"}>{cirugia.FECHA_CIRUGIA}</p>
+                                        <p className={"text-sm text-gray-500"}>{cirugia.HORA_CIRUGIA}</p>
+                                        <p className={"text-sm text-gray-500"}>{cirugia.COSTO_CIRUGIA}</p>
                                     </div>
-                                    <div className="flex w-full items-center justify-between pt-4">
-                                        <div className="flex justify-end gap-2">
-                                            <DetailsDoctor id={cita.ID_CITA}/>
-                                            <BorrarDoctor id={cita.ID_CITA}/>
-                                        </div>
+
+                                </div>
+                                <div className="flex w-full items-center justify-between pt-4">
+                                    <div className="flex justify-end gap-2">
+                                        <DetailsCirugia id={cirugia.ID_CIRUGIA}/>
+                                        <EditarCirugia id={cirugia.ID_CIRUGIA}/>
+                                        <BorrarCirugia id={cirugia.ID_CIRUGIA}/>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <table className="hidden min-w-full text-gray-900 md:table">
+                    <table className="hidden w-100 text-gray-900 md:table">
                         <thead className="rounded-lg text-left text-sm font-normal">
                         <tr>
                             <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                                Paciente
+                                Nombre
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Doctor
+                                Numero
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Fecha
+                                Departamento
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Hora
+                                Hospital
                             </th>
                             <th scope="col" className="relative py-3 pl-6 pr-3">
                                 <span className="sr-only">Edit</span>
@@ -53,30 +57,38 @@ export default async function TablaCitas(){
                         </tr>
                         </thead>
                         <tbody className="bg-white">
-                        {data?.map((cita:any) => (
+                        {cirugias?.map((cirugia:any) => (
                             <tr
-                                key={cita.ID_CITA}
+                                key={cirugia.ID_CIRUGIA}
                                 className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                             >
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex items-center gap-3">
 
-                                        <p>{cita.PACIENTE}</p>
-                                    </div>
-                                </td>
-                                <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                                    <div className="flex items-center gap-3">
-
-                                        <p>{cita.DOCTOR}</p>
+                                        <p>{cirugia.NOMBRE_CIRUGIA}</p>
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {cita.FECHA_CITA}.
+                                    {cirugia.PACIENTE}
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {cita.HORA_CITA}
+                                    {cirugia.DOCTOR}
+                                </td>
+                                <td className="whitespace-nowrap px-3 py-3">
+                                    {cirugia.FECHA_CIRUGIA}
+                                </td>
+                                <td className="whitespace-nowrap px-3 py-3">
+                                    {cirugia.HORA_CIRUGIA}
+                                </td>
+                                <td className="whitespace-nowrap px-3 py-3">
+                                    {cirugia.COSTO_CIRUGIA}
                                 </td>
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                                    <div className="flex justify-end gap-3">
+                                        <DetailsCirugia id={cirugia.ID_CIRUGIA}/>
+                                        <EditarCirugia id={cirugia.ID_CIRUGIA}/>
+                                        <BorrarCirugia id={cirugia.ID_CIRUGIA}/>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

@@ -345,12 +345,12 @@ async function getMedicinaById(id) {
 
         // Select data
         const result = await connection.execute(
-            `SELECT *
-             FROM FIDE_Medicina_TB
-             WHERE (id == FIDE_MEDICINA_TB.MEDICINA_ID)`, // Consulta
+            `SELECT * FROM FIDE_Medicina_TB
+             WHERE ${id} = ID_Medicina`, // Consulta
             [],                        // Parámetros opcionales (vacío en este caso)
             {outFormat: oracledb.OUT_FORMAT_OBJECT} // Resultado como objetos clave-valor
         );
+        console.log(result.rows);
         return result.rows;
     } catch (err) {
         console.error("Error: ", err);

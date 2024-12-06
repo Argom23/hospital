@@ -16,17 +16,17 @@ export async function HospitalesTable() {
                                 <div className="flex items-center justify-between border-b pb-4">
                                     <div>
                                         <div className="mb-2 flex items-center">
-                                            <p>{hospital.nombre_hospital}</p>
+                                            <p>{hospital.NOMBRE_HOSPITAL}</p>
                                         </div>
 
-                                        <p className="text-sm text-gray-500">{hospital.Direccion}</p>
-                                        <p className="text-sm text-gray-500">{hospital.telefono_hospital}</p>
+                                        <p className="text-sm text-gray-500">{hospital.DIRECCION}</p>
+                                        <p className="text-sm text-gray-500">{hospital.TELEFONO_HOSPITAL}</p>
                                     </div>
 
                                 </div>
                                 <div className="flex w-full items-center justify-between pt-4">
                                     <div className="flex justify-end gap-2">
-                                        <DetailsHospital id={hospital.Id_Hospital}/>
+                                        <DetailsHospital id={hospital.ID_HOSPITAL}/>
                                     </div>
                                 </div>
                             </div>
@@ -52,24 +52,24 @@ export async function HospitalesTable() {
                         <tbody className="bg-white">
                         {hospital?.map((hospital:any) => (
                             <tr
-                                key={hospital.Id_Hospital}
+                                key={hospital.ID_HOSPITAL}
                                 className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                             >
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex items-center gap-3">
 
-                                        <p>{hospital.nombre_hospital}</p>
+                                        <p>{hospital.NOMBRE_HOSPITAL}</p>
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {hospital.Direccion}.
+                                    {hospital.DIRECCION}.
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {hospital.telefono_hospital}
+                                    {hospital.TELEFONO_HOSPITAL}
                                 </td>
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">
-                                        <DetailsHospital id={hospital.Id_Hospital}/>
+                                        <DetailsHospital id={hospital.ID_HOSPITAL}/>
                                     </div>
                                 </td>
                             </tr>

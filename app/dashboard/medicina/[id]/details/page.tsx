@@ -1,8 +1,7 @@
 import {fetchMedicinaById} from "@/app/lib/data";
 import Link from "next/link";
-import Breadcrumbs from "@/app/ui/breadcrumbs";
 
-export default async function DetailsPage(props : {params: Promise<{id : number}>}){
+export default async function Page(props : {params: Promise<{id : number}>}){
 
     const params = await props.params;
     const id = params.id;
@@ -10,17 +9,10 @@ export default async function DetailsPage(props : {params: Promise<{id : number}
 
     return(
         <main>
-            <div className={'text-4xl'}><Breadcrumbs breadcrumbs={[
-                {label: 'Medicinas', href: '/dashboard/medicina'},
-                {label: 'KaisoCida', href: `/dashboard/medicina/${id}/details`, active : true},
-            ]}/></div>
-            <h1 className={'text-4xl  font-bold mb-4'}>${data.NOMBRE_MEDICINA}</h1>
+            <h1 className={'text-4xl  font-bold mb-4'}>{data[0].NOMBRE_MEDICINA}</h1>
             <div className=" p-3 bg-gray-100 rounded-xl text-2xl">
-                <div    >
-                    <label >Descripcion: Si medicina no tiene descripcion volarse esto</label>
-                </div>
                 <div>
-                    <label className={'mt-1'}>Cantidad: ${data.CANTIDAD}</label>
+                    <label className={'mt-1'}>Cantidad: {data[0].CANTIDAD}</label>
                 </div>
             </div>
             <div className=" mt-4 flex  gap-4 ">
