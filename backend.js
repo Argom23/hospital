@@ -72,6 +72,8 @@ app.get('/api/doctores/', async (req, res) => {
     const results = await getDoctores();
     res.status(200).json(results);
 });
+
+
 app.get('/api/medicinas/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -329,6 +331,7 @@ async function getMedicina() {
         }
     }
 }
+
 async function getMedicinaById(id) {
     let connection;
     try {
@@ -411,11 +414,13 @@ async function getPaciente() {
 
         // Select data
         const result = await connection.execute(
-            `SELECT * FROM FIDE_PACIENTE_V`
+            `SELECT * FROM FIDE_PACIENTE_V`,
+                [],                        // Parámetros opcionales (vacío en este caso)
+            {outFormat: oracledb.OUT_FORMAT_OBJECT} // Resultado como objetos clave-valor
         );
 
-        console.log(result.rows);
 
+        console.log(result.rows);
         return result.rows;
 
     } catch (err) {

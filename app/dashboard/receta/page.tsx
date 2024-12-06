@@ -11,7 +11,7 @@ export default function Page() {
     const fetchRecetas = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3010/api/users');
+            const response = await axios.get('http://localhost:3010/api/recetas');
             console.log(response);
             setRecetas(response.data); // Store the fetched data in state
         } catch (err) {
@@ -45,16 +45,16 @@ export default function Page() {
                         </thead>
                         <tbody>
                         {recetas.map((receta: any) => (
-                            <tr key={receta.ID_Receta}
+                            <tr key={receta.ID_RECETA}
                                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="px-6 py-4">
-                                    {receta.Paciente}
+                                    {receta.PACIENTE}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {receta.Medicina}
+                                    {receta.MEDICINA}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {receta.Fecha_Receta}
+                                    {receta.FECHA_RECETA}
                                 </td>
                                 <td className="px-6 py-4 text-right">
                                     <a href="#"

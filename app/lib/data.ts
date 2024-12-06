@@ -36,13 +36,20 @@ export  async function fetchHospitalesById(id:number) {
 }
 
 
-export async function fetchPacientes(){
-    const url='http://localhost:3010/api/pacientes';
-    const response = await fetch(url);
-    if(!response.ok){
-        throw new Error(response.statusText);
+export async function fetchPacientes(search?:string ) {
+    if (search == null){
+        const url='http://localhost:3010/api/pacientes';
+        const response = await fetch(url);
+        const json = await response.json()
+        console.log(json)
+        if(!response.ok){
+            throw new Error(response.statusText);
+        }
+        return json;
+    }else{
+
     }
-    return response.json();
+
 }
 export  async function fetchPacientesById(id:number) {
     const url = `http://localhost:3010/api/pacientes/${id}`;
