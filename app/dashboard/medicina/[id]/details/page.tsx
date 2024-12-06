@@ -6,7 +6,7 @@ export default async function DetailsPage(props : {params: Promise<{id : number}
 
     const params = await props.params;
     const id = params.id;
-    //const data = await fetchMedicinaById(id);
+    const data = await fetchMedicinaById(id);
 
     return(
         <main>
@@ -14,14 +14,13 @@ export default async function DetailsPage(props : {params: Promise<{id : number}
                 {label: 'Medicinas', href: '/dashboard/medicina'},
                 {label: 'KaisoCida', href: '/dashboard/medicina/id/details, active : true'},
             ]}/></div>
-            <h1 className={'text-4xl  font-bold mb-4'}>Detalles KaisoCida</h1>
+            <h1 className={'text-4xl  font-bold mb-4'}>${data.NOMBRE_MEDICINA}</h1>
             <div className=" p-3 bg-gray-100 rounded-xl text-2xl">
                 <div    >
-                    <label >Descripcion: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aliquam non sem et quam mollis pellentesque.</label>
+                    <label >Descripcion: Si medicina no tiene descripcion volarse esto</label>
                 </div>
                 <div>
-                    <label className={'mt-1'}>Cantidad: 21</label>
+                    <label className={'mt-1'}>Cantidad: ${data.CANTIDAD}</label>
                 </div>
             </div>
             <div className=" mt-4 flex  gap-4 ">
