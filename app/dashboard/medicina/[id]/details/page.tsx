@@ -7,7 +7,7 @@ export default async function DetailsPage(props : {params: Promise<{id : number}
     const params = await props.params;
     const id = params.id;
     const data = await fetchMedicinaById(id);
-
+//supadre
     return(
         <main>
             <div className={'text-4xl'}><Breadcrumbs breadcrumbs={[
