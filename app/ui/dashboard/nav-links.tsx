@@ -17,7 +17,7 @@ const links = [
   {name:'Hospitales', href:'/dashboard/hospitales'},
   { name: 'Paciente', href: '/dashboard/pacientes' },
   {name: 'Facturas',href: '/dashboard/facturas' },
-  {name: 'recentas', href:'/dashboard/recentas' },
+  {name: 'Recetas', href:'/dashboard/recetas' },
   {name:'Cirugia', href:'/dashboard/cirugia' },
   {name:'Personal', href:'/dashboard/personal' },
   {name: 'Tratamiento', href:'/dashboard/tratamiento' },

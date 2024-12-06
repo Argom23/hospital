@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import {lusitana} from "@/app/ui/fonts";
-import MedicinaTable from "@/app/ui/Medicina/table";
+import MedicinaTable from "@/app/ui/medicina/table";
 
 export default function Page(){
     return (
@@ -9,7 +9,7 @@ export default function Page(){
                 <Breadcrumbs breadcrumbs={
                     [
                     {label: "Dashboard" ,href: '/dashboard/'},
-                    {label:"Medicina" ,href: '/dashboard/medicina',active: true}
+                    {label:"medicina" ,href: '/dashboard/medicina',active: true}
                     ]
                 } ></Breadcrumbs>
             </div>
