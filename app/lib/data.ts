@@ -27,6 +27,16 @@ export async function fetchHospitales(){
     }
     return response.json();
 }
+
+export async function fetchDepartamentos(){
+    const url='http://localhost:3010/api/departamentos';
+    const response = await fetch(url);
+    if(!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
 export  async function fetchHospitalesById(id:number) {
     const url = `http://localhost:3010/api/hospitales/${id}`;
     const response = await fetch(url);
