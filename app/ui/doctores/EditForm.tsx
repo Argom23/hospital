@@ -1,27 +1,29 @@
 import {fetchDepartamentos, fetchDoctoresInfoById, fetchHospitales} from "@/app/lib/data";
+import {editDoctor, setId} from "@/app/lib/actions";
+
 
 
 export async function EditForm({id}:{id:number}) {
     const doctor = await fetchDoctoresInfoById(id);
     const hospitals = await fetchHospitales();
     const departments = await fetchDepartamentos();
-    const sendForm = () => {
+    setId(id);
 
-    };
- return (<form action= "" /*{sendForm}*/ method="POST" className="space-y-4">
-        <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                defaultValue={doctor[0].NOMBRE_DOCTOR}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
-        </div>
+ return (<form action= {editDoctor} method="POST" className="space-y-4">
+     <div>
+         <label id="id" className="block text-sm font-medium text-gray-700">{id}</label>
+         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre</label>
+         <input
+             type="text"
+             id="name"
+             name="name"
+             defaultValue={doctor[0].NOMBRE_DOCTOR}
+             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+         />
+     </div>
 
-        <div>
-            <label htmlFor="especialization" className="block text-sm font-medium text-gray-700">Especialización</label>
+     <div>
+         <label htmlFor="especialization" className="block text-sm font-medium text-gray-700">Especialización</label>
             <input
                 type="text"
                 id="especialization"
