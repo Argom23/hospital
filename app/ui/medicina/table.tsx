@@ -1,3 +1,4 @@
+import {DetailsHospital} from "@/app/ui/hospital/buttons.";
 import {fetchMedicina} from "@/app/lib/data";
 import { DetailsMedicina }from "@/app/ui/medicina/buttons";
 
@@ -54,11 +55,11 @@ export default async function MedicinaTable(){
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {med.CANTIDAD}.
+                                    {med.CANTIDAD}
                                 </td>
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">
-                                        <DetailsMedicina id={med.ID_MEDICINA}/>
+                                        <DetailsHospital id={med.ID_MEDICINA}/>
                                     </div>
                                 </td>
                             </tr>
