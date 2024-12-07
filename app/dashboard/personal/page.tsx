@@ -1,7 +1,7 @@
-import PersonalTable from "@/app/ui/personal/table";
+import {PersonalTable }from "@/app/ui/personal/table";
 import {Suspense} from "react";
 import Search from "@/app/ui/search";
-import {CrearPersonal} from "@/app/ui/personal/buttons.";
+import {CrearPersonal} from "@/app/ui/personal/buttons";
 
 export default async function Page( ) {
     return (

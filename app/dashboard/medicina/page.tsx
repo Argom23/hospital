@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import {lusitana} from "@/app/ui/fonts";
-import MedicinaTable from "@/app/ui/medicina/table";
+import {MedicinaTable} from "@/app/ui/medicina/table";
 
 export default function Page(){
     return (

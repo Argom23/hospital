@@ -1,7 +1,7 @@
-import PacientesTable from "@/app/ui/pacientes/table";
+import {PacientesTable }from "@/app/ui/pacientes/table";
 import {Suspense} from "react";
 import Search from "@/app/ui/search";
-import {CrearPaciente} from "@/app/ui/pacientes/buttons.";
+import {CrearPaciente} from "@/app/ui/pacientes/buttons";
 
 export default async function Page( ) {
     return (

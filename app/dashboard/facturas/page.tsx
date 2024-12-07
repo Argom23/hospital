@@ -1,4 +1,4 @@
-import FacturasTable from "@/app/ui/facturas/table";
+import {FacturasTable} from "@/app/ui/facturas/table";
 import {Suspense} from "react";
 import Search from "@/app/ui/search";
 

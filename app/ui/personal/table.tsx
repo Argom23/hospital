@@ -1,9 +1,9 @@
 
 
-import {BorrarPersonal, DetailsPersonal, EditarPersonal} from "@/app/ui/personal/buttons.";
+import {BorrarPersonal, DetailsPersonal, EditarPersonal} from "@/app/ui/personal/buttons";
 import {fetchPersonal} from "@/app/lib/data";
 
-export default async function PersonalTable() {
+export async function PersonalTable() {
     const personal = await fetchPersonal();
     return (
         <div className="mt-6 flow-root">

@@ -1,8 +1,8 @@
-import {DetailsHospital} from "@/app/ui/hospital/buttons.";
+import {DetailsHospital} from "@/app/ui/hospital/buttons";
 import {fetchMedicina} from "@/app/lib/data";
 import { DetailsMedicina }from "@/app/ui/medicina/buttons";
 
-export default async function MedicinaTable(){
+export async function MedicinaTable(){
     const data = await fetchMedicina();
     return (
         <div className="mt-6 flow-root">

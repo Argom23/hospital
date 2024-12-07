@@ -3,7 +3,7 @@
 import {DetailsFacturas} from "@/app/ui/facturas/buttons";
 import {fetchFacturas} from "@/app/lib/data";
 
-export default async function FacturasTable() {
+export async function FacturasTable() {
     const facturas = await fetchFacturas();
     return (
         <div className="mt-6 flow-root">

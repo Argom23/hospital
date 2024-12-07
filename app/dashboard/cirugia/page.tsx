@@ -1,4 +1,4 @@
-import CirugiasTable from "@/app/ui/cirugias/table";
+import {CirugiasTable} from "@/app/ui/cirugias/table";
 import {Suspense} from "react";
 import Search from "@/app/ui/search";
 import {CrearCirugia} from "@/app/ui/cirugias/buttons";

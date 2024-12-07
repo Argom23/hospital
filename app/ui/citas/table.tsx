@@ -1,9 +1,11 @@
 import {fetchCitas} from "@/app/lib/data";
-import {BorrarDoctor, DetailsDoctor, EditarDoctor} from "@/app/ui/doctores/buttons.";
+import {BorrarCita, DetailsCita} from "@/app/ui/citas/buttons";
 
-export default async function TablaCitas(){
+
+export async function TablaCitas(){
     const data = await fetchCitas();
     return (
+        <>
         <div className="mt-6 flow-root">
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
@@ -24,8 +26,8 @@ export default async function TablaCitas(){
                                     </div>
                                     <div className="flex w-full items-center justify-between pt-4">
                                         <div className="flex justify-end gap-2">
-                                            <DetailsDoctor id={cita.ID_CITA}/>
-                                            <BorrarDoctor id={cita.ID_CITA}/>
+                                            <DetailsCita id={cita.ID_CITA}/>
+                                            <BorrarCita id={cita.ID_CITA}/>
                                         </div>
                                     </div>
                                 </div>
@@ -85,5 +87,6 @@ export default async function TablaCitas(){
                 </div>
             </div>
         </div>
+        </>
     );
 }

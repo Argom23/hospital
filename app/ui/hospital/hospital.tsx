@@ -1,5 +1,5 @@
 import {fetchHospitales} from "@/app/lib/data";
-import {DetailsHospital} from "@/app/ui/hospital/buttons.";
+import {DetailsHospital} from "@/app/ui/hospital/buttons";
 
 export async function HospitalesTable() {
     const hospital = await fetchHospitales();

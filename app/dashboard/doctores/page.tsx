@@ -1,8 +1,8 @@
 
-import DoctoresTable from "@/app/ui/doctores/table";
+import {DoctoresTable} from "@/app/ui/doctores/table";
 import {Suspense} from "react";
 import Search from "@/app/ui/search";
-import {CrearDoctor} from "@/app/ui/doctores/buttons.";
+import {CrearDoctor} from "@/app/ui/doctores/buttons";
 
 
 //TODO Doctores Skeleton,

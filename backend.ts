@@ -7,80 +7,80 @@ const app = express();
 app.use(cors());
 
 
-app.get('/api/users/', async (req, res) => {
+app.get('/api/users/', async (req:any, res:any) => {
 
     const results = await run();
     res.status(200).json(results);
 });
 
-app.get('/api/facturas/', async (req, res) => {
+app.get('/api/facturas/', async (req:any, res:any) => {
 
     const results = await getFacturas();
     res.status(200).json(results);
 });
 
-app.get('/api/tratamientos/', async (req, res) => {
+app.get('/api/tratamientos/', async (req:any, res:any) => {
 
     const results = await getTratamientos();
     res.status(200).json(results);
 });
 
-app.get('/api/cirugias/', async (req, res) => {
+app.get('/api/cirugias/', async (req:any, res:any) => {
 
     const results = await getCirugias();
     res.status(200).json(results);
 });
 
-app.get('/api/personal/', async (req, res) => {
+app.get('/api/personal/', async (req:any, res:any) => {
 
     const results = await getPersonal();
     res.status(200).json(results);
 });
 
-app.get('/api/recetas/', async (req, res) => {
+app.get('/api/recetas/', async (req:any, res:any) => {
 
     const results = await getReceta();
     res.status(200).json(results);
 });
 
-app.get('/api/medicinas/', async (req, res) => {
+app.get('/api/medicinas/', async (req:any, res:any) => {
 
     const results = await getMedicina();
     res.status(200).json(results);
 });
 
-app.get('/api/citas/', async (req, res) => {
+app.get('/api/citas/', async (req:any, res:any) => {
 
     const results = await getCita();
     res.status(200).json(results);
 });
 
-app.get('/api/pacientes/', async (req, res) => {
+app.get('/api/pacientes/', async (req:any, res:any) => {
 
     const results = await getPaciente();
     res.status(200).json(results);
 });
 
-app.get('/api/hospitales/', async (req, res) => {
+app.get('/api/hospitales/', async (req:any, res:any) => {
 
     const results = await getHospital();
     res.status(200).json(results);
 });
 
-app.get('/api/doctores/', async (req, res) => {
+app.get('/api/doctores/', async (req:any, res:any) => {
 
     const results = await getDoctores();
     res.status(200).json(results);
 });
 
 
-app.get('/api/medicinas/:id', async (req, res) => {
+app.get('/api/medicinas/:id', async (req:any, res:any) => {
     const { id } = req.params;
     try {
         const results = await getMedicinaById(id);
         res.status(200).json(results);
     } catch (err) {
-        Console.log(err);
+        console.log(err);
     }
 });
 
@@ -165,7 +165,7 @@ async function getFacturas() {
     }
 }
 
-async function getTratamientos() {
+export async function getTratamientos() {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -332,7 +332,7 @@ async function getMedicina() {
     }
 }
 
-async function getMedicinaById(id) {
+async function getMedicinaById({id}:{id:number}) {
     let connection;
     try {
         connection = await oracledb.getConnection({

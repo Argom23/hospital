@@ -1,9 +1,9 @@
 
 
-import {BorrarPaciente, DetailsPaciente, EditarPaciente} from "@/app/ui/pacientes/buttons.";
+import {BorrarPaciente, DetailsPaciente, EditarPaciente} from "@/app/ui/pacientes/buttons";
 import {fetchPacientes} from "@/app/lib/data";
 
-export default async function PacientesTable() {
+export async function PacientesTable() {
     const pacientes = await fetchPacientes();
     return (
         <div className="mt-6 flow-root">
