@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {PlusIcon} from "@heroicons/react/24/outline";
-import {DeleteCitas} from "@/app/lib/actions";
+import {DeleteCita} from "@/app/lib/actions";
 
 //TODO HACER EL PUTO BORRAR
 export function CrearCita(){
@@ -18,7 +18,7 @@ export function DetailsCita({id}:{id:number}){
 }
 
 export async function BorrarCita({id}:{id:number}) {
-    const deleteCitas =  DeleteCitas.bind(null, id);
+    const deleteCitas =  DeleteCita.bind(null, id);
     return(
     <button className={"rounded-md border p-2 hover:bg-gray-100"} onClick={deleteCitas}>Borrar</button>
     );
