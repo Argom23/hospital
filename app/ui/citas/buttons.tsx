@@ -18,9 +18,9 @@ export function DetailsCita({id}:{id:number}){
 }
 
 export async function BorrarCita({id}:{id:number}) {
-    const DeleteEm = async () => await DeleteCitas(id);
+    const deleteCitas =  DeleteCitas.bind(null, id);
     return(
-    <button className={"rounded-md border p-2 hover:bg-gray-100"} onClick={DeleteEm}>Borrar</button>
+    <button className={"rounded-md border p-2 hover:bg-gray-100"} onClick={deleteCitas}>Borrar</button>
     );
 }
 export function EditarCita({id}:{id:number}) {

@@ -79,6 +79,10 @@ export async function TablaCitas(){
                                     {cita.HORA_CITA}
                                 </td>
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                                    <div className="flex justify-end gap-3">
+                                        <DetailsCita id={cita.ID_CITA}/>
+                                        <BorrarCita id={cita.ID_CITA}/>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

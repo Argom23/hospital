@@ -10,6 +10,16 @@ export async function fetchDoctoresInfo() {
     }
     return response.json();
 }
+
+export async function fetchReceta() {
+    const url='http://localhost:3010/api/recetas'
+    const response = await fetch(url);
+    if(!response.ok){
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
 export  async function fetchDoctoresInfoById(id:number) {
     const url = `http://localhost:3010/api/doctores/${id}`;
     const response = await fetch(url);
@@ -18,6 +28,7 @@ export  async function fetchDoctoresInfoById(id:number) {
     }
     return response.json();
 }
+
 
 export async function fetchHospitales(){
     const url='http://localhost:3010/api/hospitales';
@@ -36,6 +47,16 @@ export async function fetchDepartamentos(){
     }
     return response.json();
 }
+
+export async function fetchEspecializacion(){
+    const url='http://localhost:3010/api/especializaciones';
+    const response = await fetch(url);
+    if(!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
 
 export  async function fetchHospitalesById(id:number) {
     const url = `http://localhost:3010/api/hospitales/${id}`;

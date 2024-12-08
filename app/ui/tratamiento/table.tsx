@@ -1,37 +1,34 @@
 
 
-import {BorrarPersonal, DetailsPersonal, EditarPersonal} from "@/app/ui/personal/buttons";
-import {fetchPersonal} from "@/app/lib/data";
+import { fetchTratamiento} from "@/app/lib/data";
+import {DetailsTratamiento, BorrarTratamiento} from "@/app/ui/tratamiento/buttons";
 
-export async function TratamientoTable() {
-    const tratamiento = await fetchPersonal();
+
+export async function TratamientosTable() {
+    const data = await fetchTratamiento()
     return (
         <div className="mt-6 flow-root">
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
                     <div className="md:hidden">
-                        {tratamiento?.map((personal:any) => (
+                        {data?.map((Tratamientos:any) => (
                             <div
-                                key={personal.ID_PERSONAL}
+                                key={Tratamientos.ID_TRATAMIENTO}
                                 className="mb-2 w-full rounded-md bg-white p-4"
                             >
                                 <div className="flex items-center justify-between border-b pb-4">
                                     <div>
                                         <div className="mb-2 flex items-center">
-                                            <p>{personal.NOMBRE_COMPLETO}</p>
+                                            <p>{Tratamientos.MEDICINA}</p>
                                         </div>
-                                        <p className="text-sm text-gray-500">{personal.NUMERO_PERSONAL}</p>
-                                        <p className="text-sm text-gray-500">{personal.DIRECCION}</p>
-                                        <p className={"text-sm text-gray-500"}>{personal.CORREO_PERSONAL}</p>
-                                        <p className={"text-sm text-gray-500"}>{personal.DEPARTAMENTO}</p>
+                                        <p className="text-sm text-gray-500">{Tratamientos.NOMBRE_TRATAMIENTO}</p>
+                                        <p className="text-sm text-gray-500">{Tratamientos.PRECIO}</p>
                                     </div>
-
                                 </div>
                                 <div className="flex w-full items-center justify-between pt-4">
                                     <div className="flex justify-end gap-2">
-                                        <DetailsPersonal id={personal.ID_PERSONAL}/>
-                                        <EditarPersonal id={personal.ID_PERSONAL}/>
-                                        <BorrarPersonal id={personal.ID_PERSONAL}/>
+                                        <DetailsTratamiento id={Tratamientos.ID_TRATAMIENTO}/>
+                                        <BorrarTratamiento id={Tratamientos.ID_TRATAMIENTO}/>
                                     </div>
                                 </div>
                             </div>
@@ -58,34 +55,27 @@ export async function TratamientoTable() {
                         </tr>
                         </thead>
                         <tbody className="bg-white">
-                        {tratamiento?.map((paciente:any) => (
+                        {data?.map((trat:any) => (
                             <tr
-                                key={paciente.ID_PERSONAL}
+                                key={trat.ID_TRATAMIENTO}
                                 className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                             >
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex items-center gap-3">
 
-                                        <p>{paciente.NOMBRE_COMPLETO}</p>
+                                        <p>{trat.MEDICINA}</p>
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {paciente.NUMERO_PERSONAL}
+                                    {trat.NOMBRE_TRATAMIENTO}
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {paciente.DIRECCION}
-                                </td>
-                                <td className="whitespace-nowrap px-3 py-3">
-                                    {paciente.CORREO_PERSONAL}
-                                </td>
-                                <td className="whitespace-nowrap px-3 py-3">
-                                    {paciente.DEPARTAMENTO}
+                                    {trat.PRECIO}
                                 </td>
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">
-                                        <DetailsPersonal id={paciente.ID_PERSONAL}/>
-                                        <EditarPersonal id={paciente.ID_PERSONAL}/>
-                                        <BorrarPersonal id={paciente.ID_PERSONAL}/>
+                                        <DetailsTratamiento id={trat.ID_TRATAMIENTO}/>
+                                        <BorrarTratamiento id={trat.ID_TRATAMIENTO}/>
                                     </div>
                                 </td>
                             </tr>

@@ -1,25 +1,24 @@
-import TratamientoTable from "@/app/ui/tratamiento/table";
+import Breadcrumbs from "@/app/ui/breadcrumbs";
 import {Suspense} from "react";
-import Search from "@/app/ui/search";
-import {CrearTratamiento} from "@/app/ui/tratamiento/buttons.";
+import { TratamientosTable } from "@/app/ui/tratamiento/table";
 
-export default async function Page( ) {
+
+export default async function Page() {
     return (
-        <main>
-            <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                {<Search placeholder="Search invoices..."/>}
-                <CrearTratamiento/>
+        <>
+            <div className="text-2xl font-bold">
+                <Breadcrumbs breadcrumbs={[
+                    {label: "Tratamientos", href: "/dashboard/tratamientos", active: true},
+                ]}/>
             </div>
             <div>
-                <Suspense>
-                    <TratamientoTable />
+                <Suspense fallback={null}>
+                    <TratamientosTable />
                 </Suspense>
             </div>
-            <div>
-                {/*TODO HACERLAPAGINACION*/}
-            </div>
+        </>
 
 
-        </main>
+
     );
 }
