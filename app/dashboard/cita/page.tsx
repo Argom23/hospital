@@ -1,9 +1,16 @@
 import {TablaCitas} from "@/app/ui/citas/table";
+import Search from "@/app/ui/search";
+import {CrearCita} from "@/app/ui/citas/buttons";
 
 export default function page(){
-    return(
-      <div>
-          <TablaCitas/>
-      </div>
-    );
+    return (
+        <main>
+            <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+                <Search placeholder="Search invoices..."/>
+                <CrearCita/>
+            </div>
+            <div>
+                <TablaCitas/>
+            </div>
+        </main>);
 }

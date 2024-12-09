@@ -1,4 +1,4 @@
-import {fetchMedicinaById} from "@/app/lib/data";
+import {fetchDoctoresInfoById} from "@/app/lib/data";
 import Link from "next/link";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 
@@ -6,7 +6,7 @@ export default async function Page(props : {params: Promise<{id : number}>}){
 
     const params = await props.params;
     const id = params.id;
-    const data = await fetchMedicinaById(id);
+    const data = await fetchDoctoresInfoById(id);
     return(
         <main>
             <div>
@@ -28,7 +28,7 @@ export default async function Page(props : {params: Promise<{id : number}>}){
                 </div>
             </div>
             <div className=" mt-4 flex  gap-4 ">
-                <Link href="/dashboard/medicina"
+                <Link href="/dashboard/doctores"
                       className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-base font-medium text-white transition-colors hover:bg-blue-400 duration-300">
                     Volver
                 </Link>

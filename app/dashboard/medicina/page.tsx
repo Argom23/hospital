@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import {lusitana} from "@/app/ui/fonts";
-import {MedicinaTable} from "@/app/ui/medicina/table";
+import MedicinaTable from "@/app/ui/medicina/table";
+
 
 export default function Page(){
     return (
@@ -17,7 +18,7 @@ export default function Page(){
                 <label className={`${lusitana.className}text-white font-medium text-2xl`}> Inventario de farmaceuticos</label>
             </div>
             <div>
-                <MedicinaTable/>
+                <MedicinaTable />
             </div>
         </main>
 

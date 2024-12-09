@@ -48,15 +48,14 @@ export async function editCita(formData: FormData) {
             connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
         });
 
+        // @ts-ignore
+        const dateToString = formData.get('fecha_cita').toString()
+
         await connection.execute(`
-        BEGIN
-            UPDATE_FIDE_CITA(
-                ${formData.get('id_paciente')}, 
-                ${formData.get('id_doctor')}, 
-                TO_DATE('${formData.get('fecha_cita')}', 'YYYY-MM-DD'), 
-                '${formData.get('hora_cita')}'
-            );
-        END;`);
+        BEGIN 
+            UPDATE_FIDE_CITA(${id}, '${formData.get('id_paciente')}', ${formData.get('id_doctor')}, TO_DATE('${dateToString}', 'YYYY-MM-DD'), '${formData.get('hora_cita')}');
+        END;
+        `);
 
         console.log("Cita actualizada correctamente");
     } catch (err) {
@@ -536,4 +535,246 @@ export async function addDoctor(formData:FormData){
     }
     revalidatePath('/dashboard/doctores')
     redirect('/dashboard/doctores')
+}
+
+export async function addCita(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+        // @ts-ignore
+        const dateString = formData.get('fecha_cita').toString();
+        console.log(dateString);
+
+        const query = `INSERT INTO FIDE_Cita_TB (ID_CITA, ID_Paciente, ID_Doctor, Fecha_Cita, Hora_Cita) 
+                     VALUES (:id_cita, :paciente, :doctor, TO_DATE(:fecha_cita, 'YYYY-MM-DD'), :hora_cita)`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+
+        await connection.execute(query, {
+            id_cita: id,
+            paciente: formData.get('paciente'),
+            doctor: formData.get('doctor'),
+            fecha_cita: dateString,
+            hora_cita: formData.get('hora_cita')
+        });
+
+
+
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/cita');
+    redirect('/dashboard/cita');
+}
+
+export async function addCirugia(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log(id);
+
+        const query = `INSERT INTO FIDE_Cirugia_TB (ID_Cirugia, ID_Paciente, ID_Doctor, Fecha_Cirugia, Tipo_Cirugia)
+                       VALUES (:id, :patientId, :doctorId, TO_DATE(:date, 'YYYY-MM-DD'), :type)`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+        await connection.execute(query, {
+            id: formData.get('id'),
+            patientId: formData.get('patientId'),
+            doctorId: formData.get('doctorId'),
+            date: formData.get('date'),
+            type: formData.get('type')
+        });
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/cirugias');
+    redirect('/dashboard/cirugias');
+}
+
+export async function addPaciente(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log(id);
+
+        const query = `INSERT INTO FIDE_Paciente_TB (ID_Paciente, Nombre_Paciente, PriApellido_Paciente, SegApellido_Paciente, Numero_Paciente, Direccion_Paciente, Correo_Paciente) 
+                     VALUES (:id, :name, :firstLastName, :secondLastName, :phone, :address, :email)`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+        await connection.execute(query, {
+            id: formData.get('id'),
+            name: formData.get('name'),
+            firstLastName: formData.get('firstLastName'),
+            secondLastName: formData.get('secondLastName'),
+            phone: formData.get('phone'),
+            address: formData.get('address'),
+            email: formData.get('email')
+        });
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/pacientes');
+    redirect('/dashboard/pacientes');
+}
+
+export async function addPersonal(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log(id);
+
+        const query = `INSERT INTO FIDE_Personal_TB (ID_Personal, Nombre_Personal, PriApellido_Personal, SegApellido_Personal, Numero_Personal, Direccion_Personal, Correo_Personal, ID_Departamento) 
+                     VALUES (:id, :name, :firstLastName, :secondLastName, :phone, :address, :email, :departmentId)`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+        await connection.execute(query, {
+            id: formData.get('id'),
+            name: formData.get('name'),
+            firstLastName: formData.get('firstLastName'),
+            secondLastName: formData.get('secondLastName'),
+            phone: formData.get('phone'),
+            address: formData.get('address'),
+            email: formData.get('email'),
+            departmentId: formData.get('departmentId')
+        });
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/personal');
+    redirect('/dashboard/personal');
+}
+
+export async function addReceta(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log(id);
+
+        const query = `INSERT INTO FIDE_Receta_TB (ID_Receta, ID_Paciente, Nombre_Medicina, Fecha_Receta) 
+                     VALUES (:id, :patientId, :medicineName, TO_DATE(:date, 'YYYY-MM-DD'))`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+        await connection.execute(query, {
+            id: formData.get('id'),
+            patientId: formData.get('patientId'),
+            medicineName: formData.get('medicineName'),
+            date: formData.get('date')
+        });
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/recetas');
+    redirect('/dashboard/recetas');
+}
+
+export async function addTratamiento(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log(id);
+
+        const query = `INSERT INTO FIDE_Tratamiento_TB (ID_Tratamiento, ID_Paciente, Descripcion_Tratamiento, Fecha_Tratamiento) 
+                     VALUES (:id, :patientId, :description, TO_DATE(:date, 'YYYY-MM-DD'))`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+        await connection.execute(query, {
+            id: formData.get('id'),
+            patientId: formData.get('patientId'),
+            description: formData.get('description'),
+            date: formData.get('date')
+        });
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/tratamientos');
+    redirect('/dashboard/tratamientos');
 }

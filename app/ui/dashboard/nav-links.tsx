@@ -21,7 +21,7 @@ const links = [
   {name:'Cirugia', href:'/dashboard/cirugia' },
   {name:'Personal', href:'/dashboard/personal' },
   {name: 'Tratamiento', href:'/dashboard/tratamiento' },
-  {name:'Cita', href:'/dashboard/borrar' },
+  {name:'Cita', href:'/dashboard/cita' },
   {name:"Medicina", href:'/dashboard/medicina' },
 ];
 

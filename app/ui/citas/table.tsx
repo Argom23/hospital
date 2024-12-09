@@ -1,5 +1,5 @@
 import {fetchCitas} from "@/app/lib/data";
-import {BorrarCita, DetailsCita} from "@/app/ui/citas/buttons";
+import {BorrarCita, DetailsCita, EditarCita} from "@/app/ui/citas/buttons";
 
 
 export async function TablaCitas(){
@@ -28,6 +28,7 @@ export async function TablaCitas(){
                                         <div className="flex justify-end gap-2">
                                             <DetailsCita id={cita.ID_CITA}/>
                                             <BorrarCita id={cita.ID_CITA}/>
+                                            <EditarCita id={cita.ID_CITA}/>
                                         </div>
                                     </div>
                                 </div>
@@ -82,6 +83,7 @@ export async function TablaCitas(){
                                     <div className="flex justify-end gap-3">
                                         <DetailsCita id={cita.ID_CITA}/>
                                         <BorrarCita id={cita.ID_CITA}/>
+                                        <EditarCita id={cita.ID_CITA}/>
                                     </div>
                                 </td>
                             </tr>
