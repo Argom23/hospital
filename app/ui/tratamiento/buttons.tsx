@@ -16,6 +16,11 @@ export async function CrearTratamiento(){
 export async function DetailsTratamiento({id}:{id:number}){
     return <Link href={`/dashboard/tratamiento/${id}/details`} className={"rounded-md border p-2 hover:bg-gray-100"}>Detalles</Link>
 }
+
+export async function EditTratamiento({id}:{id:number}){
+    return <Link href={`/dashboard/tratamiento/${id}/edit`} className={"rounded-md border p-2 hover:bg-gray-100"}>Edit</Link>
+}
+
 export async function BorrarTratamiento({id}:{id:number}) {
     const deleteTratamiento = DeleteTratamiento.bind(null, id);
     return (

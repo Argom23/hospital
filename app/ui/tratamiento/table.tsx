@@ -1,7 +1,7 @@
 
 
 import { fetchTratamiento} from "@/app/lib/data";
-import {DetailsTratamiento, BorrarTratamiento} from "@/app/ui/tratamiento/buttons";
+import {DetailsTratamiento, BorrarTratamiento, EditTratamiento} from "@/app/ui/tratamiento/buttons";
 
 
 export async function TratamientosTable() {
@@ -11,24 +11,25 @@ export async function TratamientosTable() {
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
                     <div className="md:hidden">
-                        {data?.map((Tratamientos:any) => (
+                        {data?.map((trat:any) => (
                             <div
-                                key={Tratamientos.ID_TRATAMIENTO}
+                                key={trat.ID_TRATAMIENTO}
                                 className="mb-2 w-full rounded-md bg-white p-4"
                             >
                                 <div className="flex items-center justify-between border-b pb-4">
                                     <div>
                                         <div className="mb-2 flex items-center">
-                                            <p>{Tratamientos.MEDICINA}</p>
+                                            <p>{trat.MEDICINA}</p>
                                         </div>
-                                        <p className="text-sm text-gray-500">{Tratamientos.NOMBRE_TRATAMIENTO}</p>
-                                        <p className="text-sm text-gray-500">{Tratamientos.PRECIO}</p>
+                                        <p className="text-sm text-gray-500">{trat.NOMBRE_TRATAMIENTO}</p>
+                                        <p className="text-sm text-gray-500">{trat.PRECIO}</p>
                                     </div>
                                 </div>
                                 <div className="flex w-full items-center justify-between pt-4">
                                     <div className="flex justify-end gap-2">
-                                        <DetailsTratamiento id={Tratamientos.ID_TRATAMIENTO}/>
-                                        <BorrarTratamiento id={Tratamientos.ID_TRATAMIENTO}/>
+                                        <DetailsTratamiento id={trat.ID_TRATAMIENTO}/>
+                                        <EditTratamiento id={trat.ID_TRATAMIENTO}/>
+                                        <BorrarTratamiento id={trat.ID_TRATAMIENTO}/>
                                     </div>
                                 </div>
                             </div>
@@ -75,6 +76,7 @@ export async function TratamientosTable() {
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">
                                         <DetailsTratamiento id={trat.ID_TRATAMIENTO}/>
+                                        <EditTratamiento id={trat.ID_TRATAMIENTO}/>
                                         <BorrarTratamiento id={trat.ID_TRATAMIENTO}/>
                                     </div>
                                 </td>

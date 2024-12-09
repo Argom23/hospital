@@ -240,12 +240,7 @@ export async function editTratamiento(formData: FormData) {
 
         await connection.execute(`
         BEGIN
-            UPDATE_FIDE_TRATAMIENTO(
-                ${formData.get('id_tratamiento')}, 
-                ${formData.get('id_paciente')}, 
-                '${formData.get('descripcion_tratamiento')}', 
-                TO_DATE('${formData.get('fecha_tratamiento')}', 'YYYY-MM-DD')
-            );
+            UPDATE_FIDE_TRATAMIENTO(${id}, ${formData.get('medicina')}, '${formData.get('name')}', ${formData.get('price')});
         END;`);
 
         console.log("Tratamiento actualizado correctamente");
@@ -262,8 +257,8 @@ export async function editTratamiento(formData: FormData) {
         }
     }
 
-    revalidatePath('/dashboard/tratamientos');
-    redirect('/dashboard/tratamientos');
+    revalidatePath('/dashboard/tratamiento');
+    redirect('/dashboard/tratamiento');
 }
 
 // TODOS LOS DELETE
@@ -752,15 +747,15 @@ export async function addTratamiento(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Tratamiento_TB (ID_Tratamiento, ID_Paciente, Descripcion_Tratamiento, Fecha_Tratamiento) 
-                     VALUES (:id, :patientId, :description, TO_DATE(:date, 'YYYY-MM-DD'))`;
+        const query = `INSERT INTO FIDE_Tratamiento_TB (ID_Tratamiento, ID_Medicina, Nombre_Tratamiento, Precio)
+                       VALUES (:id, :medicina, :name, :price)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
-            id: formData.get('id'),
-            patientId: formData.get('patientId'),
-            description: formData.get('description'),
-            date: formData.get('date')
+            id: id,
+            medicina: formData.get('medicina'),
+            name: formData.get('name'),
+            price: formData.get('price')
         });
         connection.commit();
     } catch (err) {
@@ -775,6 +770,6 @@ export async function addTratamiento(formData: FormData) {
             }
         }
     }
-    revalidatePath('/dashboard/tratamientos');
-    redirect('/dashboard/tratamientos');
+    revalidatePath('/dashboard/tratamiento');
+    redirect('/dashboard/tratamiento');
 }
