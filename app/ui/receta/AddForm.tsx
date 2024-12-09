@@ -1,21 +1,37 @@
-import { fetchTratamiento, fetchMedicina } from "@/app/lib/data";
-import {addTratamiento, setId} from "@/app/lib/actions";
+import { fetchReceta, fetchPacientes , fetchMedicina} from "@/app/lib/data";
+import {addReceta, setId} from "@/app/lib/actions";
 
 
 
-export async function AddTratamientoForm() {
-    const data = await fetchTratamiento();
+export async function AddRecetaForm() {
+    const data = await fetchReceta();
     const lastId = () => {
-        const sortedData = data.sort((a:any, b:any) => b.ID_TRATAMIENTO - a.ID_TRATAMIENTO);
-        return sortedData[0].ID_TRATAMIENTO;
+        const sortedData = data.sort((a:any, b:any) => b.ID_RECETA - a.ID_RECETA);
+        return sortedData[0].ID_RECETA;
     }
     const nextId = await lastId() + 1;
 
+    const pacientes = await fetchPacientes();
     const medicinas = await fetchMedicina();
     await setId(nextId);
- return (<form action={addTratamiento} className="space-y-4">
+ return (<form action={addReceta} className="space-y-4">
      <div className="space-y-4">
          <label id="id" className="block text-sm font-medium text-gray-700">{nextId}</label>
+     </div>
+     <div>
+         <label htmlFor="paciente" className="block text-sm font-medium text-gray-700">Paciente</label>
+         <select
+             id="paciente"
+             name="paciente"
+             defaultValue='1'
+             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+         >
+             {pacientes.map((p: any) => (
+                 <option key={p.ID_PACIENTE} value={p.ID_PACIENTE}>
+                     {p.NOMBRE_COMPLETO}
+                 </option>
+             ))}
+         </select>
      </div>
      <div>
          <label htmlFor="medicina" className="block text-sm font-medium text-gray-700">Medicina</label>
@@ -33,22 +49,11 @@ export async function AddTratamientoForm() {
          </select>
      </div>
      <div>
-         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre Tratamiento</label>
+         <label htmlFor="fecha" className="block text-sm font-medium text-gray-700">Fecha Receta</label>
          <input
-             type="text"
-             id="name"
-             name="name"
-             defaultValue='Nombre del tratamiento'
-             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-         />
-     </div>
-     <div>
-         <label htmlFor="price" className="block text-sm font-medium text-gray-700">Precio</label>
-         <input
-             type="number"
-             id="price"
-             name="price"
-             defaultValue='Precio del tratamiento'
+             type="date"
+             id="fecha"
+             name="fecha"
              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
          />
      </div>

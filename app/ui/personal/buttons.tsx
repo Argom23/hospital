@@ -1,5 +1,6 @@
 import Link from "next/link";
-import {PlusIcon} from "@heroicons/react/24/outline";
+import {PlusIcon, TrashIcon} from "@heroicons/react/24/outline";
+import {DeletePersonal} from "@/app/lib/actions";
 
 //TODO HACER EL PUTO BORRAR JAJAJAJA
 export function CrearPersonal(){
@@ -17,9 +18,14 @@ export function DetailsPersonal({id}:{id:number}){
 }
 
 export function BorrarPersonal({id}:{id:number}) {
-    return(
-    <Link href={`/dashboard/personal/${id}/borrar`} className={"rounded-md border p-2 hover:bg-gray-100"}>Borrar</Link>
-    );
+    const deletePersonal = DeletePersonal.bind(null, id);
+    return (
+        <form action={deletePersonal}>
+            <button className="rounded-md border p-2 hover:bg-gray-100" type={"submit"}>
+                <span className="sr-only">Delete</span>
+                <TrashIcon className="w-5" />
+            </button>
+        </form>);
 }
 export function EditarPersonal({id}:{id:number}) {
     return(

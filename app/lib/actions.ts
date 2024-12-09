@@ -164,14 +164,17 @@ export async function editPersonal(formData: FormData) {
         await connection.execute(`
         BEGIN
             UPDATE_FIDE_PERSONAL(
-                ${formData.get('id_personal')}, 
-                '${formData.get('nombre_personal')}', 
-                '${formData.get('primer_apellido')}', 
-                '${formData.get('segundo_apellido')}', 
-                '${formData.get('direccion_personal')}', 
-                '${formData.get('correo_personal')}', 
-                '${formData.get('telefono_personal')}'
-            );
+            ${id}, 
+            '${formData.get('nombre')}', 
+            '${formData.get('priApellido')}',
+            '${formData.get('segApellido')}', 
+            ${formData.get('telefono')}, 
+            ${formData.get('pais')}, 
+            ${formData.get('provincia')}, 
+            ${formData.get('canton')}, 
+            ${formData.get('distrito')} , 
+            '${formData.get('correo')}', 
+            ${formData.get('departamento')});
         END;`);
 
         console.log("Personal actualizado correctamente");
@@ -203,12 +206,7 @@ export async function editReceta(formData: FormData) {
 
         await connection.execute(`
         BEGIN
-            UPDATE_FIDE_RECETA(
-                ${formData.get('id_receta')}, 
-                ${formData.get('id_paciente')}, 
-                '${formData.get('nombre_medicina')}', 
-                TO_DATE('${formData.get('fecha_receta')}', 'YYYY-MM-DD')
-            );
+            UPDATE_FIDE_RECETA(${id}, ${formData.get('paciente')}, ${formData.get('medicina')}, TO_DATE('${formData.get('fecha')}', 'YYYY-MM-DD'));
         END;`);
 
         console.log("Receta actualizada correctamente");
@@ -225,8 +223,8 @@ export async function editReceta(formData: FormData) {
         }
     }
 
-    revalidatePath('/dashboard/recetas');
-    redirect('/dashboard/recetas');
+    revalidatePath('/dashboard/receta');
+    redirect('/dashboard/receta');
 }
 
 export async function editTratamiento(formData: FormData) {
@@ -667,19 +665,22 @@ export async function addPersonal(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Personal_TB (ID_Personal, Nombre_Personal, PriApellido_Personal, SegApellido_Personal, Numero_Personal, Direccion_Personal, Correo_Personal, ID_Departamento) 
-                     VALUES (:id, :name, :firstLastName, :secondLastName, :phone, :address, :email, :departmentId)`;
+        const query = `INSERT INTO FIDE_Personal_TB (ID_Personal, Nombre_Personal, PrimApellido_Personal, SegApellido_Personal, Numero_Personal, ID_Pais, ID_Provincia, ID_Canton, ID_Distrito, Correo_Personal, ID_Departamento) 
+                     VALUES (:id, :nombre, :priApellido, :segApellido, :telefono, :pais, :provincia, :canton, :distrito  , :correo, :departamento)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
-            id: formData.get('id'),
-            name: formData.get('name'),
-            firstLastName: formData.get('firstLastName'),
-            secondLastName: formData.get('secondLastName'),
-            phone: formData.get('phone'),
-            address: formData.get('address'),
-            email: formData.get('email'),
-            departmentId: formData.get('departmentId')
+            id: id,
+            nombre: formData.get('nombre'),
+            priApellido: formData.get('priApellido'),
+            segApellido: formData.get('segApellido'),
+            telefono: formData.get('telefono'),
+            pais: formData.get('pais'),
+            provincia: formData.get('provincia'),
+            canton: formData.get('canton'),
+            distrito: formData.get('distrito'),
+            correo: formData.get('correo'),
+            departamento: formData.get('departamento')
         });
         connection.commit();
     } catch (err) {
@@ -709,15 +710,18 @@ export async function addReceta(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Receta_TB (ID_Receta, ID_Paciente, Nombre_Medicina, Fecha_Receta) 
-                     VALUES (:id, :patientId, :medicineName, TO_DATE(:date, 'YYYY-MM-DD'))`;
+        // @ts-ignore
+        const dateToString = formData.get('fecha').toString();
+
+        const query = `INSERT INTO FIDE_Receta_TB (ID_Receta, ID_Paciente, ID_MEDICINA, Fecha_Receta) 
+                     VALUES (:id, :paciente, :medicina, TO_DATE(:fecha, 'YYYY-MM-DD'))`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
-            id: formData.get('id'),
-            patientId: formData.get('patientId'),
-            medicineName: formData.get('medicineName'),
-            date: formData.get('date')
+            id: id,
+            paciente: formData.get('paciente'),
+            medicina: formData.get('medicina'),
+            fecha: dateToString
         });
         connection.commit();
     } catch (err) {
@@ -732,8 +736,8 @@ export async function addReceta(formData: FormData) {
             }
         }
     }
-    revalidatePath('/dashboard/recetas');
-    redirect('/dashboard/recetas');
+    revalidatePath('/dashboard/receta');
+    redirect('/dashboard/receta');
 }
 
 export async function addTratamiento(formData: FormData) {

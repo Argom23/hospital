@@ -104,6 +104,43 @@ export async function fetchMedicina(){
 
 }
 
+export async function fetchPaises() {
+    const url = 'http://localhost:3010/api/paises';
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
+export async function fetchProvincias() {
+    const url = 'http://localhost:3010/api/provincias';
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
+export async function fetchCantones() {
+    const url = 'http://localhost:3010/api/cantones';
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
+export async function fetchDistritos() {
+    const url = 'http://localhost:3010/api/distritos';
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
+
 // SEARCH
 
 export async function fetchPacientes(search?:string ) {
