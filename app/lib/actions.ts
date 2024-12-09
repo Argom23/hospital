@@ -773,6 +773,7 @@ export async function addTratamiento(formData: FormData) {
     revalidatePath('/dashboard/tratamiento');
     redirect('/dashboard/tratamiento');
 }
+
 export async function addMedicina(formData: FormData) {
     let connection;
     try {

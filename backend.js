@@ -89,6 +89,26 @@ app.get('/api/especializaciones/', async (req, res) => {
     res.status(200).json(results);
 });
 
+app.get('/api/paises/', async (req, res) => {
+    const results = await getPais();
+    res.status(200).json(results);
+});
+
+app.get('/api/provincias/', async (req, res) => {
+    const results = await getProvincia();
+    res.status(200).json(results);
+});
+
+app.get('/api/cantones/', async (req, res) => {
+    const results = await getCanton();
+    res.status(200).json(results);
+});
+
+app.get('/api/distritos/', async (req, res) => {
+    const results = await getDistrito();
+    res.status(200).json(results);
+});
+
 // SPECIFIC ID
 
 app.get('/api/medicinas/:id', async (req, res) => {
@@ -635,6 +655,134 @@ async function getDepartamentos() {
              FROM FIDE_Departamento_TB`, // Consulta
             [],                        // Parámetros opcionales (vacío en este caso)
             {outFormat: oracledb.OUT_FORMAT_OBJECT} // Resultado como objetos clave-valor
+        );
+        return result.rows;
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+}
+
+async function getPais() {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",
+            password: "Password123",
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",
+        });
+
+        console.log("Successfully connected to Oracle Database");
+
+        const result = await connection.execute(
+            `SELECT * FROM FIDE_PAIS_TB`,
+            [],
+            { outFormat: oracledb.OUT_FORMAT_OBJECT }
+        );
+        return result.rows;
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+}
+
+async function getProvincia() {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",
+            password: "Password123",
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",
+        });
+
+        console.log("Successfully connected to Oracle Database");
+
+        const result = await connection.execute(
+            `SELECT * FROM FIDE_Provincia_TB`,
+            [],
+            { outFormat: oracledb.OUT_FORMAT_OBJECT }
+        );
+        return result.rows;
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+}
+
+async function getCanton() {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",
+            password: "Password123",
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",
+        });
+
+        console.log("Successfully connected to Oracle Database");
+
+        const result = await connection.execute(
+            `SELECT * FROM FIDE_Canton_TB`,
+            [],
+            { outFormat: oracledb.OUT_FORMAT_OBJECT }
+        );
+        return result.rows;
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+}
+
+async function getDistrito() {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",
+            password: "Password123",
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",
+        });
+
+        console.log("Successfully connected to Oracle Database");
+
+        const result = await connection.execute(
+            `SELECT * FROM FIDE_Distrito_TB`,
+            [],
+            { outFormat: oracledb.OUT_FORMAT_OBJECT }
         );
         return result.rows;
     } catch (err) {
