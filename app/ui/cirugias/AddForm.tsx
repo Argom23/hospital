@@ -1,6 +1,6 @@
 import {
     fetchCirugias, fetchDoctoresInfo,
-    fetchMedicina, fetchPacientes
+    fetchPacientes
 
 } from "@/app/lib/data";
 import {addCirugia, setId} from "@/app/lib/actions";
@@ -25,6 +25,7 @@ export async function AddCirugiaForm() {
                 id="NOMBRE_CIRUGIA"
                 name="NOMBRE_CIRUGIA"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
             />
         </div>
         <div>
@@ -32,8 +33,8 @@ export async function AddCirugiaForm() {
             <select
                 id="ID_PACIENTE"
                 name="ID_PACIENTE"
-                defaultValue='1'
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
             >
                 {pacientes.map((paciente: any) => (
                     <option key={paciente.ID_PACIENTE} value={paciente.ID_PACIENTE}>
@@ -47,8 +48,8 @@ export async function AddCirugiaForm() {
             <select
                 id="ID_DOCTOR"
                 name="ID_DOCTOR"
-                defaultValue='1'
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
             >
                 {doctores.map((doctor: any) => (
                     <option key={doctor.ID_DOCTOR} value={doctor.ID_DOCTOR}>
@@ -59,10 +60,20 @@ export async function AddCirugiaForm() {
         </div>
         <div>
             <input
+                type="date"
+                id="FECHA_CIRUGIA"
+                name="FECHA_CIRUGIA"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
+            />
+        </div>
+        <div>
+            <input
                 type="text"
                 id="HORA_CIRUGIA"
                 name="HORA_CIRUGIA"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
             />
         </div>
         <div>
@@ -71,6 +82,7 @@ export async function AddCirugiaForm() {
                 id="COSTO_CIRUGIA"
                 name="COSTO_CIRUGIA"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
             />
         </div>
         <div>

@@ -250,3 +250,21 @@ export async function fetchMedicinaById(id:number){
     return response.json();
 
 }
+export async function fetchPais(){
+    const url='http://localhost:3010/api/pais';
+    const response = await fetch(url);
+    if(!response.ok){
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+export async function fetchProvincia(){
+    const url=`http://localhost:3010/api/provincias/`;
+    const response = await fetch(url);
+    if(!response.ok){
+        throw new Error(response.statusText);
+    }
+    return response.json();
+}
+
+

@@ -1,12 +1,17 @@
-import {AddPersonalForm} from "@/app/ui/personal/AddForm";
+
 import React from "react";
+import Breadcrumbs from "@/app/ui/breadcrumbs";
+import {AddPersonalForm} from "@/app/ui/personal/AddForm";
 
 
-export default function Page() {
+
+export default async function page() {
     return (
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-6">Agregar Personal</h1>
-            <AddPersonalForm />
+            <div>
+                <Breadcrumbs breadcrumbs={[{label:"Personal",href:'/dashboard/personal'},{label: "Agregar Personal", href:"/dashboard/personal/create",active:true}]}/>
+            </div>
+            <AddPersonalForm/>
         </div>
     );
 }

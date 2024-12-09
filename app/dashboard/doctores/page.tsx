@@ -18,11 +18,6 @@ export default async function Page( ) {
                     <DoctoresTable />
                 </Suspense>
             </div>
-            <div>
-                {/*TODO HACERLAPAGINACION*/}
-            </div>
-
-
         </main>
 );
 }
