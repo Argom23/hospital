@@ -87,11 +87,13 @@ export async function editCirugia(formData: FormData) {
         await connection.execute(`
         BEGIN
             UPDATE_FIDE_CIRUGIA(
-                ${formData.get('id_cirugia')}, 
-                ${formData.get('id_paciente')}, 
-                ${formData.get('id_doctor')}, 
-                TO_DATE('${formData.get('fecha_cirugia')}', 'YYYY-MM-DD'), 
-                '${formData.get('descripcion')}'
+                ${id}, 
+                '${formData.get('NOMBRE_CIRUGIA')}', 
+                ${formData.get('ID_PACIENTE')}, 
+                ${formData.get('ID_DOCTOR')}, 
+                TO_DATE('${formData.get('FECHA_CIRUGIA')}', 'YYYY-MM-DD'), 
+                '${formData.get('HORA_CIRUGIA')}', 
+                ${formData.get('COSTO_CIRUGIA')}
             );
         END;`);
 
@@ -109,8 +111,8 @@ export async function editCirugia(formData: FormData) {
         }
     }
 
-    revalidatePath('/dashboard/cirugias');
-    redirect('/dashboard/cirugias');
+    revalidatePath('/dashboard/cirugia');
+    redirect('/dashboard/cirugia');
 }
 
 export async function editPaciente(formData: FormData) {
@@ -125,12 +127,16 @@ export async function editPaciente(formData: FormData) {
         await connection.execute(`
         BEGIN
             UPDATE_FIDE_PACIENTE(
-                ${formData.get('id_paciente')}, 
-                '${formData.get('nombre_paciente')}', 
-                '${formData.get('apellido_paciente')}', 
-                '${formData.get('direccion_paciente')}', 
-                '${formData.get('correo_paciente')}', 
-                '${formData.get('telefono_paciente')}'
+                ${id}, 
+                '${formData.get('NOMBRE_PACIENTE')}', 
+                '${formData.get('PRIAPELLIDO_PACIENTE')}',
+                '${formData.get('SEGAPELLIDO_PACIENTE')}',
+                ${formData.get('NUMERO_PACIENTE')},
+                ${formData.get('ID_PAIS')}, 
+                ${formData.get('ID_PROVINCIA')}, 
+                ${formData.get('ID_CANTON')}, 
+                ${formData.get('ID_DISTRITO')}, 
+                '${formData.get('CORREO_PACIENTE')}'                
             );
         END;`);
 
@@ -150,6 +156,38 @@ export async function editPaciente(formData: FormData) {
 
     revalidatePath('/dashboard/pacientes');
     redirect('/dashboard/pacientes');
+}
+
+export async function editMedicina(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        await connection.execute(`
+        BEGIN
+            UPDATE_FIDE_MEDICINA(${id}, '${formData.get('NOMBRE_MEDICINA')}', ${formData.get('CANTIDAD')});
+        END;`);
+
+        console.log("Medicina actualizada correctamente");
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+
+    revalidatePath('/dashboard/medicina');
+    redirect('/dashboard/medicina');
 }
 
 export async function editPersonal(formData: FormData) {
@@ -317,8 +355,8 @@ export async function DeleteCirugia(DeleteId: number) {
         }
     }
 
-    revalidatePath('/dashboard/cirugias');
-    redirect('/dashboard/cirugias');
+    revalidatePath('/dashboard/cirugia');
+    redirect('/dashboard/cirugia');
 }
 
 export async function DeletePaciente(DeleteId: number) {
@@ -489,6 +527,34 @@ export async function DeleteCita(DelteId:number){
     redirect('/dashboard/cita')
 }
 
+export async function DeleteMedicina(DelteId:number){
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+        connection.execute(`
+        BEGIN
+            DELETE_FIDE_MEDICINA(${DelteId});
+        END;`);
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/borrar')
+    redirect('/dashboard/cita')
+}
+
 // TODOS LOS CREATE
 
 export async function addDoctor(formData:FormData){
@@ -585,16 +651,21 @@ export async function addCirugia(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Cirugia_TB (ID_Cirugia, ID_Paciente, ID_Doctor, Fecha_Cirugia, Tipo_Cirugia)
-                       VALUES (:id, :patientId, :doctorId, TO_DATE(:date, 'YYYY-MM-DD'), :type)`;
+        // @ts-ignore
+        const dateToString = formData.get('FECHA_CIRUGIA').toString();
+
+        const query = `INSERT INTO FIDE_Cirugia_TB (ID_Cirugia, Nombre_Cirugia, ID_Paciente, ID_Doctor, Fecha_Cirugia, Hora_Cirugia, Costo_Cirugia)
+                       VALUES (:id, :NOMBRE_CIRUGIA, :ID_PACIENTE, :ID_DOCTOR, TO_DATE(:FECHA_CIRUGIA, 'YYYY-MM-DD'), :HORA_CIRUGIA , :COSTO_CIRUGIA)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
-            id: formData.get('id'),
-            patientId: formData.get('patientId'),
-            doctorId: formData.get('doctorId'),
-            date: formData.get('date'),
-            type: formData.get('type')
+            id: id,
+            NOMBRE_CIRUGIA: formData.get('NOMBRE_CIRUGIA'),
+            ID_PACIENTE: formData.get('ID_PACIENTE'),
+            ID_DOCTOR: formData.get('ID_DOCTOR'),
+            FECHA_CIRUGIA: dateToString,
+            HORA_CIRUGIA: formData.get('HORA_CIRUGIA'),
+            COSTO_CIRUGIA: formData.get('COSTO_CIRUGIA')
         });
         connection.commit();
     } catch (err) {
@@ -609,8 +680,8 @@ export async function addCirugia(formData: FormData) {
             }
         }
     }
-    revalidatePath('/dashboard/cirugias');
-    redirect('/dashboard/cirugias');
+    revalidatePath('/dashboard/cirugia');
+    redirect('/dashboard/cirugia');
 }
 
 export async function addPaciente(formData: FormData) {
@@ -624,18 +695,30 @@ export async function addPaciente(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Paciente_TB (ID_Paciente, Nombre_Paciente, PriApellido_Paciente, SegApellido_Paciente, Numero_Paciente, Direccion_Paciente, Correo_Paciente) 
-                     VALUES (:id, :name, :firstLastName, :secondLastName, :phone, :address, :email)`;
+        const query = `INSERT INTO FIDE_Paciente_TB (ID_Paciente, Nombre_Paciente, PriApellido_Paciente, SegApellido_Paciente, Numero_Paciente, ID_Pais, ID_Provincia, ID_Canton, ID_Distrito, Correo_Paciente) 
+                     VALUES (:ID_PACIENTE, 
+                             :NOMBRE_PACIENTE, 
+                             :PRIAPELLIDO_PACIENTE, 
+                             :SEGAPELLIDO_PACIENTE, 
+                             :NUMERO_PACIENTE, 
+                             :ID_PAIS, 
+                             :ID_PROVINCIA, 
+                             :ID_CANTON, 
+                             :ID_DISTRITO, 
+                             :CORREO_PACIENTE)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
-            id: formData.get('id'),
-            name: formData.get('name'),
-            firstLastName: formData.get('firstLastName'),
-            secondLastName: formData.get('secondLastName'),
-            phone: formData.get('phone'),
-            address: formData.get('address'),
-            email: formData.get('email')
+            ID_PACIENTE: id,
+            NOMBRE_PACIENTE: formData.get('NOMBRE_PACIENTE'),
+            PRIAPELLIDO_PACIENTE: formData.get('PRIAPELLIDO_PACIENTE'),
+            SEGAPELLIDO_PACIENTE: formData.get('SEGAPELLIDO_PACIENTE'),
+            NUMERO_PACIENTE: formData.get('NUMERO_PACIENTE'),
+            ID_PAIS: formData.get('ID_PAIS'),
+            ID_PROVINCIA: formData.get('ID_PROVINCIA'),
+            ID_CANTON: formData.get('ID_CANTON'),
+            ID_DISTRITO: formData.get('ID_DISTRITO'),
+            CORREO_PACIENTE: formData.get('CORREO_PACIENTE')
         });
         connection.commit();
     } catch (err) {

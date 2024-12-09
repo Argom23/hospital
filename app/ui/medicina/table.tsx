@@ -1,6 +1,6 @@
 
 import {fetchMedicina} from "@/app/lib/data";
-import {DetailsMedicina} from "@/app/ui/medicina/buttons";
+import {BorrarMedicina, DetailsMedicina, EditMedicina} from "@/app/ui/medicina/buttons";
 
 export default async function MedicinaTable(){
 
@@ -28,6 +28,8 @@ export default async function MedicinaTable(){
                                 <div className="flex w-full items-center justify-between pt-4">
                                     <div className="flex justify-end gap-2">
                                         <DetailsMedicina id={med.ID_MEDICINA}/>
+                                        <EditMedicina id={med.ID_MEDICINA}/>
+                                        <BorrarMedicina id={med.ID_MEDICINA}/>
                                     </div>
                                 </div>
                             </div>
@@ -62,6 +64,8 @@ export default async function MedicinaTable(){
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">
                                         <DetailsMedicina id={med.ID_MEDICINA}/>
+                                        <EditMedicina id={med.ID_MEDICINA}/>
+                                        <BorrarMedicina id={med.ID_MEDICINA}/>
                                     </div>
                                 </td>
                             </tr>

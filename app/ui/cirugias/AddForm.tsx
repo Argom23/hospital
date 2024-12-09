@@ -38,7 +38,7 @@ export async function AddCirugiaForm() {
             >
                 {pacientes.map((paciente: any) => (
                     <option key={paciente.ID_PACIENTE} value={paciente.ID_PACIENTE}>
-                        {paciente.NOMBRE_PACIENTE}
+                        {paciente.NOMBRE_COMPLETO}
                     </option>
                 ))}
             </select>
@@ -59,6 +59,7 @@ export async function AddCirugiaForm() {
             </select>
         </div>
         <div>
+            <label htmlFor="paciente" className="block text-sm font-medium text-gray-700">Fecha</label>
             <input
                 type="date"
                 id="FECHA_CIRUGIA"
@@ -68,6 +69,7 @@ export async function AddCirugiaForm() {
             />
         </div>
         <div>
+            <label htmlFor="paciente" className="block text-sm font-medium text-gray-700">Hora</label>
             <input
                 type="text"
                 id="HORA_CIRUGIA"
@@ -77,6 +79,7 @@ export async function AddCirugiaForm() {
             />
         </div>
         <div>
+            <label htmlFor="paciente" className="block text-sm font-medium text-gray-700">Costo</label>
             <input
                 type="number"
                 id="COSTO_CIRUGIA"

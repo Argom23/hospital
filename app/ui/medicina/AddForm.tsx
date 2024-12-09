@@ -1,11 +1,5 @@
-import {
-    fetchDepartamentos,
-    fetchDoctoresInfo,
-    fetchHospitales,
-    fetchEspecializacion,
-    fetchMedicina
-} from "@/app/lib/data";
-import {addDoctor, addMedicina, setId} from "@/app/lib/actions";
+import { fetchMedicina } from "@/app/lib/data";
+import {addMedicina, setId} from "@/app/lib/actions";
 
 
 
@@ -20,17 +14,18 @@ export async function AddMedicinaForm() {
 
     return (<form action={addMedicina} className="space-y-4">
         <div>
-            <label id="id" className="block text-sm font-medium text-gray-700"></label>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre</label>
+            <label id="id" className="block text-sm font-medium text-gray-700">{nextId}</label>
+        </div>
+        <div>
+            <label htmlFor="NOMBRE_MEDICINA" className="block text-sm font-medium text-gray-700">Nombre</label>
             <input
                 type="text"
-                id="NOMBRE_MEDICAMENTO"
-                name="NOMBRE_MEDICAMENTO"
+                id="NOMBRE_MEDICINA"
+                name="NOMBRE_MEDICINA"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
         </div>
         <div>
-            <label id="id" className="block text-sm font-medium text-gray-700"></label>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Cantidad</label>
             <input
                 type="number"

@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import {lusitana} from "@/app/ui/fonts";
 import MedicinaTable from "@/app/ui/medicina/table";
+import {CrearMedicina} from "@/app/ui/medicina/buttons";
 
 
 export default function Page(){
@@ -9,18 +10,23 @@ export default function Page(){
             <div>
                 <Breadcrumbs breadcrumbs={
                     [
-                    {label: "Dashboard" ,href: '/dashboard/'},
-                    {label:"medicina" ,href: '/dashboard/medicina',active: true}
+                        {label: "Dashboard", href: '/dashboard/'},
+                        {label: "medicina", href: '/dashboard/medicina', active: true}
                     ]
-                } ></Breadcrumbs>
+                }></Breadcrumbs>
+            </div>
+
+            <div>
+                <label className={`${lusitana.className}text-white font-medium text-2xl`}> Inventario de
+                    farmaceuticos</label>
+            </div>
+            <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+                <CrearMedicina/>
             </div>
             <div>
-                <label className={`${lusitana.className}text-white font-medium text-2xl`}> Inventario de farmaceuticos</label>
-            </div>
-            <div>
-                <MedicinaTable />
+                <MedicinaTable/>
             </div>
         </main>
 
-);
+    );
 }

@@ -1,6 +1,6 @@
 import {
     fetchCantones, fetchDistritos,
-    fetchPacientes, fetchPais, fetchProvincia
+    fetchPacientes, fetchPaises, fetchProvincias
 
 } from "@/app/lib/data";
 import {addPaciente, setId} from "@/app/lib/actions";
@@ -9,8 +9,8 @@ import {addPaciente, setId} from "@/app/lib/actions";
 
 export async function AddPacienteForm() {
     const data = await fetchPacientes();
-    const paises = await fetchPais();
-    const provincias = await fetchProvincia();
+    const paises = await fetchPaises();
+    const provincias = await fetchProvincias();
     const cantones = await fetchCantones();
     const distritos = await fetchDistritos();
     const last = () => {
@@ -81,7 +81,7 @@ export async function AddPacienteForm() {
             </select>
         </div>
         <div>
-            <label htmlFor="provincia" className="block text-sm font-medium text-gray-700">Canton</label>
+            <label htmlFor="canton" className="block text-sm font-medium text-gray-700">Canton</label>
             <select
                 id="ID_CANTON"
                 name="ID_CANTON"
@@ -95,15 +95,15 @@ export async function AddPacienteForm() {
             </select>
         </div>
         <div>
-            <label htmlFor="provincia" className="block text-sm font-medium text-gray-700">Distrito</label>
+            <label htmlFor="distrito" className="block text-sm font-medium text-gray-700">Distrito</label>
             <select
-                id="ID_CANTON"
-                name="ID_CANTON"
+                id="ID_DISTRITO"
+                name="ID_DISTRITO"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             >
                 {distritos.map((p: any) => (
                     <option key={p.ID_DISTRITO} value={p.ID_DISTRITO}>
-                        {p.NOMBRE_DISTRITO}
+                        {p.NOMBRE_DISTRITOS}
                     </option>
                 ))}
             </select>
