@@ -5,8 +5,8 @@ import {addPersonal, setId} from "@/app/lib/actions";
 export async function AddPersonalForm() {
     const data = await fetchPersonal();
     const lastId = () => {
-        const sortedData = data.sort((a: any, b: any) => b.ID_TRATAMIENTO - a.ID_TRATAMIENTO);
-        return sortedData[0].ID_TRATAMIENTO;
+        const sortedData = data.sort((a: any, b: any) => b.ID_PERSONAL - a.ID_PERSONAL);
+        return sortedData[0].ID_PERSONAL;
     }
     const nextId = await lastId() + 1;
 
