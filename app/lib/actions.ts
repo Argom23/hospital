@@ -773,3 +773,38 @@ export async function addTratamiento(formData: FormData) {
     revalidatePath('/dashboard/tratamiento');
     redirect('/dashboard/tratamiento');
 }
+export async function addMedicina(formData: FormData) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({
+            user: "FIDE_HOSPITAL",   // Usuario
+            password: "Password123",    // Contraseña
+            connectionString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))",    // Alias en tnsnames.ora
+        });
+
+        console.log(id);
+
+        const query = `INSERT INTO FIDE_MEDICINA_TB (ID_MEDICINA, NOMBRE_MEDICINA, CANTIDAD) VALUES (:ID_MEDICINA, :NOMBRE_MEDICINA, :CANTIDAD)`;
+
+        // Ejecuta la consulta con los parámetros de enlace
+        await connection.execute(query, {
+            ID_MEDICINA: id,
+            NOMBRE_MEDICINA: formData.get('NOMBRE_MEDICINA'),
+            CANTIDAD: formData.get('CANTIDAD'),
+        });
+        connection.commit();
+    } catch (err) {
+        console.error("Error: ", err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+                console.log("Connection closed");
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+    revalidatePath('/dashboard/medicina');
+    redirect('/dashboard/medicina');
+}
