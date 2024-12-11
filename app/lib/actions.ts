@@ -2,15 +2,18 @@
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import oracledb from "oracledb";
+import {fetchDoctoresInfoById, fetchPersonalById} from "@/app/lib/data";
+import {NextResponse} from "next/server";
 
-let id:number;
-export async function setId(newId:number){
+let id: number;
+
+export async function setId(newId: number) {
     id = newId;
 }
 
 // TODOS LOS EDIT
 
-export async function editDoctor(formData:FormData){
+export async function editDoctor(formData: FormData) {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -299,7 +302,7 @@ export async function editTratamiento(formData: FormData) {
 
 // TODOS LOS DELETE
 
-export async function DeleteDoctor(DelteId:number){
+export async function DeleteDoctor(DelteId: number) {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -407,7 +410,7 @@ export async function DeletePersonal(DeleteId: number) {
                 DELETE_FIDE_PERSONAL(${DeleteId});
             END;`,
             [], // Empty array for bind variables if needed
-            { autoCommit: true } // Ensure changes are committed
+            {autoCommit: true} // Ensure changes are committed
         );
         console.log(`Personal with ID ${DeleteId} successfully deleted`);
 
@@ -447,7 +450,7 @@ export async function DeleteReceta(DeleteId: number) {
                 DELETE_FIDE_RECETA(${DeleteId});
             END;`,
             [], // Empty array for bind variables if needed
-            { autoCommit: true } // Ensure changes are committed
+            {autoCommit: true} // Ensure changes are committed
         );
         console.log(`Receta with ID ${DeleteId} successfully deleted`);
 
@@ -471,7 +474,7 @@ export async function DeleteReceta(DeleteId: number) {
     redirect('/dashboard/receta');
 }
 
-export async function DeleteTratamiento(DelteId:number){
+export async function DeleteTratamiento(DelteId: number) {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -499,7 +502,7 @@ export async function DeleteTratamiento(DelteId:number){
     redirect('/dashboard/tratamiento')
 }
 
-export async function DeleteCita(DelteId:number){
+export async function DeleteCita(DelteId: number) {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -527,7 +530,7 @@ export async function DeleteCita(DelteId:number){
     redirect('/dashboard/cita')
 }
 
-export async function DeleteMedicina(DelteId:number){
+export async function DeleteMedicina(DelteId: number) {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -557,7 +560,7 @@ export async function DeleteMedicina(DelteId:number){
 
 // TODOS LOS CREATE
 
-export async function addDoctor(formData:FormData){
+export async function addDoctor(formData: FormData) {
     let connection;
     try {
         connection = await oracledb.getConnection({
@@ -568,8 +571,9 @@ export async function addDoctor(formData:FormData){
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Doctor_TB (ID_Doctor, ID_Especializacion, Nombre_Doctor, ID_Departamento, ID_Hospital) 
-                     VALUES (:id, :espec, :name, :department, :hospital)`;
+        const query = `INSERT INTO FIDE_Doctor_TB (ID_Doctor, ID_Especializacion, Nombre_Doctor, ID_Departamento,
+                                                   ID_Hospital)
+                       VALUES (:id, :espec, :name, :department, :hospital)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
@@ -608,8 +612,8 @@ export async function addCita(formData: FormData) {
         const dateString = formData.get('fecha_cita').toString();
         console.log(dateString);
 
-        const query = `INSERT INTO FIDE_Cita_TB (ID_CITA, ID_Paciente, ID_Doctor, Fecha_Cita, Hora_Cita) 
-                     VALUES (:id_cita, :paciente, :doctor, TO_DATE(:fecha_cita, 'YYYY-MM-DD'), :hora_cita)`;
+        const query = `INSERT INTO FIDE_Cita_TB (ID_CITA, ID_Paciente, ID_Doctor, Fecha_Cita, Hora_Cita)
+                       VALUES (:id_cita, :paciente, :doctor, TO_DATE(:fecha_cita, 'YYYY-MM-DD'), :hora_cita)`;
 
         // Ejecuta la consulta con los parámetros de enlace
 
@@ -620,7 +624,6 @@ export async function addCita(formData: FormData) {
             fecha_cita: dateString,
             hora_cita: formData.get('hora_cita')
         });
-
 
 
         connection.commit();
@@ -654,8 +657,10 @@ export async function addCirugia(formData: FormData) {
         // @ts-ignore
         const dateToString = formData.get('FECHA_CIRUGIA').toString();
 
-        const query = `INSERT INTO FIDE_Cirugia_TB (ID_Cirugia, Nombre_Cirugia, ID_Paciente, ID_Doctor, Fecha_Cirugia, Hora_Cirugia, Costo_Cirugia)
-                       VALUES (:id, :NOMBRE_CIRUGIA, :ID_PACIENTE, :ID_DOCTOR, TO_DATE(:FECHA_CIRUGIA, 'YYYY-MM-DD'), :HORA_CIRUGIA , :COSTO_CIRUGIA)`;
+        const query = `INSERT INTO FIDE_Cirugia_TB (ID_Cirugia, Nombre_Cirugia, ID_Paciente, ID_Doctor, Fecha_Cirugia,
+                                                    Hora_Cirugia, Costo_Cirugia)
+                       VALUES (:id, :NOMBRE_CIRUGIA, :ID_PACIENTE, :ID_DOCTOR, TO_DATE(:FECHA_CIRUGIA, 'YYYY-MM-DD'),
+                               :HORA_CIRUGIA, :COSTO_CIRUGIA)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
@@ -695,17 +700,19 @@ export async function addPaciente(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Paciente_TB (ID_Paciente, Nombre_Paciente, PriApellido_Paciente, SegApellido_Paciente, Numero_Paciente, ID_Pais, ID_Provincia, ID_Canton, ID_Distrito, Correo_Paciente) 
-                     VALUES (:ID_PACIENTE, 
-                             :NOMBRE_PACIENTE, 
-                             :PRIAPELLIDO_PACIENTE, 
-                             :SEGAPELLIDO_PACIENTE, 
-                             :NUMERO_PACIENTE, 
-                             :ID_PAIS, 
-                             :ID_PROVINCIA, 
-                             :ID_CANTON, 
-                             :ID_DISTRITO, 
-                             :CORREO_PACIENTE)`;
+        const query = `INSERT INTO FIDE_Paciente_TB (ID_Paciente, Nombre_Paciente, PriApellido_Paciente,
+                                                     SegApellido_Paciente, Numero_Paciente, ID_Pais, ID_Provincia,
+                                                     ID_Canton, ID_Distrito, Correo_Paciente)
+                       VALUES (:ID_PACIENTE,
+                               :NOMBRE_PACIENTE,
+                               :PRIAPELLIDO_PACIENTE,
+                               :SEGAPELLIDO_PACIENTE,
+                               :NUMERO_PACIENTE,
+                               :ID_PAIS,
+                               :ID_PROVINCIA,
+                               :ID_CANTON,
+                               :ID_DISTRITO,
+                               :CORREO_PACIENTE)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
@@ -748,8 +755,11 @@ export async function addPersonal(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_Personal_TB (ID_Personal, Nombre_Personal, PrimApellido_Personal, SegApellido_Personal, Numero_Personal, ID_Pais, ID_Provincia, ID_Canton, ID_Distrito, Correo_Personal, ID_Departamento) 
-                     VALUES (:id, :nombre, :priApellido, :segApellido, :telefono, :pais, :provincia, :canton, :distrito  , :correo, :departamento)`;
+        const query = `INSERT INTO FIDE_Personal_TB (ID_Personal, Nombre_Personal, PrimApellido_Personal,
+                                                     SegApellido_Personal, Numero_Personal, ID_Pais, ID_Provincia,
+                                                     ID_Canton, ID_Distrito, Correo_Personal, ID_Departamento)
+                       VALUES (:id, :nombre, :priApellido, :segApellido, :telefono, :pais, :provincia, :canton,
+                               :distrito, :correo, :departamento)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
@@ -796,8 +806,8 @@ export async function addReceta(formData: FormData) {
         // @ts-ignore
         const dateToString = formData.get('fecha').toString();
 
-        const query = `INSERT INTO FIDE_Receta_TB (ID_Receta, ID_Paciente, ID_MEDICINA, Fecha_Receta) 
-                     VALUES (:id, :paciente, :medicina, TO_DATE(:fecha, 'YYYY-MM-DD'))`;
+        const query = `INSERT INTO FIDE_Receta_TB (ID_Receta, ID_Paciente, ID_MEDICINA, Fecha_Receta)
+                       VALUES (:id, :paciente, :medicina, TO_DATE(:fecha, 'YYYY-MM-DD'))`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
@@ -872,7 +882,8 @@ export async function addMedicina(formData: FormData) {
 
         console.log(id);
 
-        const query = `INSERT INTO FIDE_MEDICINA_TB (ID_MEDICINA, NOMBRE_MEDICINA, CANTIDAD) VALUES (:ID_MEDICINA, :NOMBRE_MEDICINA, :CANTIDAD)`;
+        const query = `INSERT INTO FIDE_MEDICINA_TB (ID_MEDICINA, NOMBRE_MEDICINA, CANTIDAD)
+                       VALUES (:ID_MEDICINA, :NOMBRE_MEDICINA, :CANTIDAD)`;
 
         // Ejecuta la consulta con los parámetros de enlace
         await connection.execute(query, {
@@ -895,4 +906,40 @@ export async function addMedicina(formData: FormData) {
     }
     revalidatePath('/dashboard/medicina');
     redirect('/dashboard/medicina');
+}
+
+
+// Login
+
+export async function TryLogin(formData: FormData) {
+    // @ts-ignore
+    const searchId: number = parseInt(formData.get('id'));
+    console.log(searchId);
+    const username: any = formData.get('username');
+    console.log(username);
+    const error = `Error de usuario o id de inicio de sesión`;
+
+    // Verifica si los valores de búsqueda son válidos
+    if (!searchId || !username) {
+        return redirect(`/login?error=${encodeURIComponent(error)}`);
+    }
+
+    const personal = await fetchPersonalById(searchId);
+    const doctor = await fetchDoctoresInfoById(searchId);
+
+    if(doctor !== null) {
+        if (doctor && doctor[0] && doctor[0].NOMBRE_DOCTOR === username && doctor[0].ID_DOCTOR === searchId) {
+            revalidatePath("/dashboard/");
+            redirect("/dashboard/");
+        }
+    }
+    if(personal !== null){
+        if (personal && personal[0] && personal[0].CORREO_PERSONAL === username && personal[0].ID_PERSONAL === searchId) {
+            revalidatePath("/dashboard/");
+            return redirect("/dashboard/");
+        }
+    }
+
+    return redirect(`/login?error=${encodeURIComponent(error)}`);
+
 }

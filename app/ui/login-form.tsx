@@ -1,67 +1,61 @@
-import { lusitana } from '@/app/ui/fonts';
-import {
-  AtSymbolIcon,
-  KeyIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from './button';
+"use client"
+import React, {useEffect, useState} from "react";
+import { TryLogin } from "@/app/lib/actions";
 
-export default function LoginForm() {
+export default function LoginForm({ error }: { error?: string }) {
+  const [loginError, setLoginError] = useState<string | null>(null);
+
+  // Leer el error de la URL cuando el componente se monta
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const errorMessage = params.get("error");
+    if (errorMessage) {
+      setLoginError(errorMessage);
+
+      const currentUrl = window.location.href.split('?')[0];
+      window.history.replaceState({}, '', currentUrl);
+      error ='';
+    }
+  }, []);
+
   return (
-    <form className="space-y-3">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
-        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-          Please log in to continue.
-        </h1>
-        <div className="w-full">
-          <div>
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <div className="relative">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+          {/* Título del formulario */}
+          <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Login</h2>
+          {/* Mostrar el error si existe */}
+          {loginError && (
+              <div className="text-red-500 text-sm mb-4">{loginError}</div>
+          )}
+          <form action={TryLogin} className="space-y-4">
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
-                required
+                  type="text"
+                  id="username"
+                  name="username"
+                  className="mt-1 mr-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
-          </div>
-          <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <div className="relative">
+            <div>
+              <label htmlFor="id" className="block text-sm font-medium text-gray-700">Id e inicio de sesión</label>
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                required
-                minLength={6}
+                  type="number"
+                  id="id"
+                  name="id"
+                  className="mt-1 mr-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
-              <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
-          </div>
-        </div>
-        <Button className="mt-4 w-full">
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </Button>
-        <div className="flex h-8 items-end space-x-1">
-          {/* Add form errors here */}
+            <div>
+              <button
+                  type="submit"
+                  className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-    </form>
   );
 }
