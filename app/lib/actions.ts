@@ -312,7 +312,7 @@ export async function DeleteDoctor(DelteId: number) {
         });
         connection.execute(`
         BEGIN
-            DELETE_FIDE_TRATAMIENTO(${DelteId});
+            DELETE_FIDE_DOCTOR(${DelteId});
         END;`);
     } catch (err) {
         console.error("Error: ", err);
@@ -326,8 +326,8 @@ export async function DeleteDoctor(DelteId: number) {
             }
         }
     }
-    revalidatePath('/dashboard/tratamiento')
-    redirect('/dashboard/tratamiento')
+    revalidatePath('/dashboard/doctores')
+    redirect('/dashboard/doctores')
 }
 
 export async function DeleteCirugia(DeleteId: number) {
@@ -526,7 +526,7 @@ export async function DeleteCita(DelteId: number) {
             }
         }
     }
-    revalidatePath('/dashboard/borrar')
+    revalidatePath('/dashboard/cita')
     redirect('/dashboard/cita')
 }
 
@@ -554,8 +554,8 @@ export async function DeleteMedicina(DelteId: number) {
             }
         }
     }
-    revalidatePath('/dashboard/borrar')
-    redirect('/dashboard/cita')
+    revalidatePath('/dashboard/medicina')
+    redirect('/dashboard/medicina')
 }
 
 // TODOS LOS CREATE
@@ -667,7 +667,7 @@ export async function addCirugia(formData: FormData) {
             id: id,
             NOMBRE_CIRUGIA: formData.get('NOMBRE_CIRUGIA'),
             ID_PACIENTE: formData.get('ID_PACIENTE'),
-            ID_DOCTOR: formData.get('ID_DOCTOR'),
+            ID_FACTURA: formData.get('ID_DOCTOR'),
             FECHA_CIRUGIA: dateToString,
             HORA_CIRUGIA: formData.get('HORA_CIRUGIA'),
             COSTO_CIRUGIA: formData.get('COSTO_CIRUGIA')
@@ -907,7 +907,6 @@ export async function addMedicina(formData: FormData) {
     revalidatePath('/dashboard/medicina');
     redirect('/dashboard/medicina');
 }
-
 
 // Login
 

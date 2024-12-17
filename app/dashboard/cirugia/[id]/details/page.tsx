@@ -33,7 +33,7 @@ export default async function Page(props : {params: Promise<{id : number}>}){
                 </div>
             </div>
             <div className=" mt-4 flex  gap-4 ">
-                <Link href="/dashboard/cita"
+                <Link href="/dashboard/cirugia"
                       className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-base font-medium text-white transition-colors hover:bg-blue-400 duration-300">
                     Volver
                 </Link>

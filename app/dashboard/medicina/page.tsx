@@ -11,7 +11,7 @@ export default function Page(){
                 <Breadcrumbs breadcrumbs={
                     [
                         {label: "Dashboard", href: '/dashboard/'},
-                        {label: "medicina", href: '/dashboard/medicina', active: true}
+                        {label: "Medicina", href: '/dashboard/medicina', active: true}
                     ]
                 }></Breadcrumbs>
             </div>

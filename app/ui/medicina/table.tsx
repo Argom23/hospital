@@ -39,7 +39,7 @@ export default async function MedicinaTable(){
                         <thead className="rounded-lg text-left text-sm font-normal">
                         <tr>
                             <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                                Nombre
+                                Nombre de Medicina
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
                                 Cantidad
@@ -59,7 +59,7 @@ export default async function MedicinaTable(){
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {med.CANTIDAD}.
+                                    {med.CANTIDAD}
                                 </td>
                                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
                                     <div className="flex justify-end gap-3">

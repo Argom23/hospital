@@ -7,7 +7,6 @@ export default async function Page( ) {
     return (
         <main>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                {<Search placeholder="Search invoices..."/>}
                 <CrearCirugia/>
             </div>
             <div>

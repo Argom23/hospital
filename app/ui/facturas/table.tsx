@@ -39,16 +39,19 @@ export async function FacturasTable() {
                         <thead className="rounded-lg text-left text-sm font-normal">
                         <tr>
                             <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                                Nombre
+                                Tratamiento
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Numero
+                                Paciente
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Departamento
+                                Doctor
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Hospital
+                                Fecha
+                            </th>
+                            <th scope="col" className="px-3 py-5 font-medium">
+                                Costo
                             </th>
                             <th scope="col" className="relative py-3 pl-6 pr-3">
                                 <span className="sr-only">Edit</span>
@@ -72,9 +75,6 @@ export async function FacturasTable() {
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
                                     {factura.DOCTOR}
-                                </td>
-                                <td className="whitespace-nowrap px-3 py-3">
-                                    {factura.CORREO_PERSONAL}
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
                                     {factura.FECHA_FACTURA}

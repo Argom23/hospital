@@ -39,16 +39,13 @@ export async function RecetaTable() {
                         <thead className="rounded-lg text-left text-sm font-normal">
                         <tr>
                             <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                                Nombre
+                                Paciente
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Numero
+                                Medicina
                             </th>
                             <th scope="col" className="px-3 py-5 font-medium">
-                                Departamento
-                            </th>
-                            <th scope="col" className="px-3 py-5 font-medium">
-                                Hospital
+                                Fecha
                             </th>
                             <th scope="col" className="relative py-3 pl-6 pr-3">
                                 <span className="sr-only">Edit</span>
@@ -66,9 +63,6 @@ export async function RecetaTable() {
 
                                         <p>{receta.PACIENTE}</p>
                                     </div>
-                                </td>
-                                <td className="whitespace-nowrap px-3 py-3">
-                                    {receta.NUMERO_PERSONAL}
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
                                     {receta.MEDICINA}

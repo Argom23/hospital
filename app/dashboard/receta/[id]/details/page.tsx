@@ -13,15 +13,15 @@ export default async function Page(props : {params: Promise<{id : number}>}){
             <div>
                 <Breadcrumbs breadcrumbs={[
                     {label: "Recetas", href: "/dashboard/receta"},
-                    {label: `Receta Num: ${data[0].ID_RECETA}`, href: `/dashboard/receta/${id}/details`, active:true},
+                    {label: `Receta Número: ${data[0].ID_RECETA}`, href: `/dashboard/receta/${id}/details`, active:true},
                 ]}/>
             </div>
             <div className=" p-3 bg-gray-100 rounded-xl text-xl mb-1">
                 <div>
-                    <label className={'mt-1'}>Paciente: {paciente[0].NOMBRE_PACIENTE}</label>
+                    <label className={'mt-1'}>Paciente: {paciente[0].PACIENTE}</label>
                 </div>
                 <div>
-                    <label className={'mt-1'}>Medicamento: {medicina[0].NOMBRE_MEDICINA}</label>
+                    <label className={'mt-1'}>Medicamento: {medicina[0].MEDICINA}</label>
                 </div>
                 <div>
                     <label className={'mt-1'}>Fecha: {data[0].FECHA_RECETA}</label>

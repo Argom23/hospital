@@ -18,7 +18,7 @@ export default async function Page(props : {params: Promise<{id : number}>}){
             <h1 className={'text-4xl  font-bold mb-4'}>{data[0].NOMBRE_TRATAMIENTO}</h1>
             <div className=" p-3 bg-gray-100 rounded-xl text-xl mb-1">
                 <div >
-                    <label className={'mt-1'}>Medicina: {medicina[0].NOMBRE_MEDICINA}</label>
+                    <label className={'mt-1'}>Medicina: {medicina[0].MEDICINA}</label>
                 </div>
                 <div>
                     <label className={'mt-1'}>Precio: {data[0].PRECIO}</label>

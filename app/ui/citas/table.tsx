@@ -74,7 +74,7 @@ export async function TablaCitas(){
                                     </div>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
-                                    {cita.FECHA_CITA}.
+                                    {cita.FECHA_CITA}
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-3">
                                     {cita.HORA_CITA}
